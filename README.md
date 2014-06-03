@@ -1,6 +1,6 @@
 # Association UI for Symphony
 
-This project has kindly been funded by Bernardo Dias da Cruz, Ben Babcock, Juraj Kapsz, Daniel Golbig, Vojtech Grec, Andrea Buran, [Brendan Abbot](http://bloodbone.ws/), Roman Klein, [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/) and others. 
+This project has kindly been funded by Bernardo Dias da Cruz, Ben Babcock, Juraj Kapsz, Daniel Golbig, Vojtech Grec, Andrea Buran, [Brendan Abbot](http://bloodbone.ws/), [Roman Klein](http://romanklein.com), [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/) and others. 
 
 ## A New Take on Subsections: An Association Interface
 
