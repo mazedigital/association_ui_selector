@@ -2,7 +2,7 @@
 
 This project has kindly been funded by Bernardo Dias da Cruz, Ben Babcock, Juraj Kapsz, Daniel Golbig, Vojtech Grec, Andrea Buran, [Brendan Abbot](http://bloodbone.ws/), Roman Klein, [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/) and others. 
 
-# A New Take on Subsections: An Association Interface
+## A New Take on Subsections: An Association Interface
 
 With the release of Symphony 2.4, a question that I've heard a lot over the course of the last couple of years came up again: Will [Subsection Manager](https://github.com/hananils/subsectionmanager) be updated to the latest Symphony version?
 
@@ -10,7 +10,7 @@ The answer is twofold. No, Subsection Manager as you know it will not be updated
 
 With this post, we'll offer you a concept how to replace Subsection Manager with something new, more versatile and interchangeable based on the latest Symphony features: the Association Interface. To bring this idea to life, we're offering our time and expertise in turn for funding by you, the community.
 
-## Starting Point
+### Starting Point
 
 The core functions for relationship management are offered by Symphony itself. Thanks to the commitment of John Porter, we have a solid base for managing associations which Symphony exposes in a simple interface in the right drawer since version 2.3.
 
@@ -23,7 +23,7 @@ While the first is quite robust, it's lacking a real UI. The second one is simil
 
 The main problem with all existing solutions available: they can't replace each other without you editing the database and your entries by hand. All extensions focus on their own field instances and don't look at the broader concept of associations, that is also used by default select boxes and tag lists (the usage of "dynamic values" creates associations that can be shown in the entry indexes).
 
-## Step 1: Combining Subsection Manager, Duplicators and Selectize
+### Step 1: Combining Subsection Manager, Duplicators and Selectize
 
 ![Combining Subsection Manager and Seletize](http://projekte.nilshoerrmann.de/screenshots/association-ui_combining.png)
 
@@ -32,7 +32,7 @@ As of version 2.4, Symphony includes [Selectize](http://brianreavis.github.io/se
 It will be compatible with Symphony 2.4 and above.
 
 ## Step 2: Inline Editing
-
+#
 ![Paper Stack](http://projekte.nilshoerrmann.de/screenshots/association-ui_paper-stack.png)
 
 Subsection Manager proved that displaying and editing associated entries inline reduces cognitive complexity of association management. The main problem was the implementation that relied on a small, space-limited iframe inside the Duplicator interface. But inline editing is not about previewing content, it's about creating content. It needs space.
@@ -41,7 +41,7 @@ Our idea is to create a new inline editor that builds on the existing layout str
 
 [Basecamp](http://signalvnoise.com/posts/3111-basecamp-next-ui-preview) has been doing something similar for a few years.
 
-## Step 3: Nested and Sortable Data Source output
+### Step 3: Nested and Sortable Data Source output
 
 Two features have been very prominent in Subsection Manager: nested and sortable Data Source output. 
 
@@ -49,7 +49,7 @@ Nested or inline output of associated entries has been a time saver when you cre
 
 Sort order can be determined by storage order in the database. So the Association UI just needs to offer an additional sorting feature to set the order. 
 
-## Funding Goals
+### Funding Goals
 
 Creating an association interface for Symphony is a complex task. We are aware of this as we have been supporting the Symphony community with Subsection Manager over the last four years. It takes time to build and test the components and it also takes time to maintain and update them over time. That's why we'd kindly like to ask you to support this project to lift association management to a new level.
 
@@ -61,7 +61,7 @@ These are our funding goals:
 
 [![PayPal Donation](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=YAVPERDXP89TC)
 
-## Donations: 1510€  
+### Donations: 1510€  
 
 Thanks for your support!
 
