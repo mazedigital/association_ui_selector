@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="association_ui_selector" status="development" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>Association UI: Selector</name>
+	<description>Search and select associated entries</description>
+	<repo type="github">https://github.com/hananils/association_ui_selector</repo>
+	<types>
+		<type>Associations</type>
+	</types>
+	<authors>
+		<author>
+			<name github="hananils" symphony="hananils">Büro für Web- und Textgestaltung</name>
+			<website>http://hananils.de</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.1" date="2014-06-04" min="2.4">
+			- Initial release.
+		</release>
+	</releases>
+</extension>
