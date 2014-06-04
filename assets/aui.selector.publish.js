@@ -25,11 +25,25 @@
 						title : Symphony.Language.get('Remove'),
 						className : 'destructor'
 					}
-				}			
+				},
+				hideSelected: true,
+				render: {
+					item: function(data, escape) {
+						return '<div class="item"><span>' + escape(data.text) + '</span></div>';
+					}
+				},
 			});
 
 			// Set placeholder text
 			select[0].selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
+
+			// Make sortable
+			select[0].selectize.$control.symphonyOrderable({
+				items: '.item',
+				handles: 'span',
+				ignore: 'input, textarea, select, a',
+				delay: 250
+			});
 		};
 
 		// API
