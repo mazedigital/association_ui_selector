@@ -15,7 +15,8 @@
 		};
 
 		var buildInterface = function() {
-			var select = $(this).find('select');
+			var select = $(this).find('select'),
+				selectize;
 
 			// Apply Selectize
 			select.selectize({
@@ -35,14 +36,17 @@
 			});
 
 			// Set placeholder text
-			select[0].selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
+			selectize = select[0].selectize
+			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
 
 			// Make sortable
-			select[0].selectize.$control.symphonyOrderable({
+			selectize.$control.symphonyOrderable({
 				items: '.item',
 				handles: 'span',
 				ignore: 'input, textarea, select, a',
 				delay: 250
+			}).on('orderstart.orderable', function() {
+				selectize.close();
 			});
 		};
 

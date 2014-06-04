@@ -54,6 +54,7 @@
 	width: 100% !important;
 	position: relative !important;
 	left: 0 !important;
+	opacity: 1 !important;
 }
 
 [data-ui=aui-selector] .selectize-input .item + input {
