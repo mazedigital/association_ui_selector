@@ -47,6 +47,8 @@
 				delay: 250
 			}).on('orderstart.orderable', function() {
 				selectize.close();
+			}).on('orderstop.orderable', function() {
+				selectize.blur();
 			});
 		};
 
