@@ -1,4 +1,4 @@
-# Association UI for Symphony: Selector
+# Association UI for Symphony: Selector (in development)
 
 This project has kindly been funded by Bernardo Dias da Cruz, Ben Babcock, Juraj Kapsz, Daniel Golbig, Vojtech Grec, Andrea Buran, [Brendan Abbot](http://bloodbone.ws/), [Roman Klein](http://romanklein.com), [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/) and others. [Read more](http://www.getsymphony.com/discuss/thread/106489/). 
 
