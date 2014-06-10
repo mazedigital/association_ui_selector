@@ -8,8 +8,8 @@ Class extension_association_ui_selector extends Extension
     {
         self::$provides = array(
             'association-ui' => array(
-                'selector' => 'Search and select',
-                'selector-sortable' => 'Search and select – sortable'
+                'aui-selector' => 'Search and select',
+                'aui-selector-sortable' => 'Search and select – sortable'
             )
         );
 

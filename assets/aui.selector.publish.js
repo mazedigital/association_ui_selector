@@ -10,12 +10,13 @@
 		var fields;
 
 		var init = function() {
-			fields = Symphony.Elements.contents.find('.field-selectbox_link').attr('data-ui', 'aui-selector');
+			fields = Symphony.Elements.contents.find('[data-ui^="aui-selector"]');
 			fields.each(buildInterface);
 		};
 
 		var buildInterface = function() {
-			var select = $(this).find('select'),
+			var field = $(this),
+				select = field.find('select'),
 				selectize;
 
 			// Apply Selectize
@@ -40,16 +41,18 @@
 			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
 
 			// Make sortable
-			selectize.$control.symphonyOrderable({
-				items: '.item',
-				handles: 'span',
-				ignore: 'input, textarea, select, a',
-				delay: 250
-			}).on('orderstart.orderable', function() {
-				selectize.close();
-			}).on('orderstop.orderable', function() {
-				selectize.blur();
-			});
+			if(field.is('[data-ui="aui-selector-sortable"]')) {
+				selectize.$control.symphonyOrderable({
+					items: '.item',
+					handles: 'span',
+					ignore: 'input, textarea, select, a',
+					delay: 250
+				}).on('orderstart.orderable', function() {
+					selectize.close();
+				}).on('orderstop.orderable', function() {
+					selectize.blur();
+				});
+			}
 		};
 
 		// API
