@@ -2,6 +2,33 @@
 
 Class extension_association_ui_selector extends Extension
 {
+    private static $provides = array();
+
+    public static function registerProviders()
+    {
+        self::$provides = array(
+            'association-ui' => array(
+                'Selector' => array('selector')
+            )
+        );
+
+        return true;
+    }
+
+    public static function providerOf($type = null)
+    {
+        self::registerProviders();
+
+        if (is_null($type)) {
+            return self::$provides;
+        }
+
+        if (!isset(self::$provides[$type])) {
+            return array();
+        }
+
+        return self::$provides[$type];
+    }
 
     /**
      * {@inheritDoc}
