@@ -47,43 +47,40 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
             );
         }
 
-        // Query field data
-        $data = Symphony::Database()->fetch($query);
-
         // Fetch field values
         $result = array();
-        $field = FieldManager::fetch($field_id);
-        foreach ($data as $field_data) {
-            $entry_id = $field_data['entry_id'];
+        $data = Symphony::Database()->fetch($query);
 
-            if ($field instanceof ExportableField && in_array(ExportableField::UNFORMATTED, $field->getExportModes())) {
+        if (!empty($data)) {
+            $field = FieldManager::fetch($field_id);
 
-                // Get unformatted value
-                $value = $field->prepareExportValue($field_data, ExportableField::UNFORMATTED, $entry_id);
+            foreach ($data as $field_data) {
+                $entry_id = $field_data['entry_id'];
 
-            } else if ($field instanceof ExportableField && in_array(ExportableField::VALUE, $field->getExportModes())) {
+                if ($field instanceof ExportableField && in_array(ExportableField::UNFORMATTED, $field->getExportModes())) {
 
-                // Get formatted value
-                $value = $field->prepareExportValue($field_data, ExportableField::VALUE, $entry_id);
+                    // Get unformatted value
+                    $value = $field->prepareExportValue($field_data, ExportableField::UNFORMATTED, $entry_id);
 
-            } else {
+                } else if ($field instanceof ExportableField && in_array(ExportableField::VALUE, $field->getExportModes())) {
 
-                // Get value from parameter pool
-                $value = $field->getParameterPoolValue($field_data, $entry_id);
+                    // Get formatted value
+                    $value = $field->prepareExportValue($field_data, ExportableField::VALUE, $entry_id);
 
+                } else {
+
+                    // Get value from parameter pool
+                    $value = $field->getParameterPoolValue($field_data, $entry_id);
+
+                }
+
+                $result[$entry_id] = $value;
             }
-
-            $result[$entry_id] = $value;
         }
 
+
         // Return results
-        return $this->_Result = array(
-            'request' => array(
-                'field_id' => $field_id,
-                'query' => $search
-            ),
-            'result' => $result
-        );
+        return $this->_Result['entries'] = $result;
     }
     
 }

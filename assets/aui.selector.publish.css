@@ -2,11 +2,11 @@
  * Association UI: Selector 
  */
 
-[data-ui=aui-selector] .selectize-control {
+[data-interface=aui-selector] .selectize-control {
 	position: relative;
 }
 
-[data-ui=aui-selector] .selectize-input {
+[data-interface=aui-selector] .selectize-input {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border: 0.1rem solid #C5C5C5;
@@ -17,7 +17,7 @@
 
 /* Items */
 
-[data-ui=aui-selector] .item {
+[data-interface=aui-selector] .item {
 	color: #3D3D3D;
 	padding: 0.7rem 1rem;
 	border-top: 0.1rem solid transparent;
@@ -27,7 +27,7 @@
 	position: relative;
 }
 
-[data-ui=aui-selector] .ordering {
+[data-interface=aui-selector] .ordering {
 	cursor: move;
 	background-color: #668abe;
 	border-color: #5c83ba !important;
@@ -35,12 +35,12 @@
 	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
 }
 
-[data-ui=aui-selector] .item + .item {
+[data-interface=aui-selector] .item + .item {
 	margin-top: 0.1rem;
 	border-top: 0.1rem solid #fafafa;
 }
 
-[data-ui=aui-selector] .selectize-input input {
+[data-interface=aui-selector] .selectize-input input {
 	display: block;
 	margin: 0.5rem 0;
 	padding: 0;
@@ -57,21 +57,21 @@
 	opacity: 1 !important;
 }
 
-[data-ui=aui-selector] .selectize-input .item + input {
+[data-interface=aui-selector] .selectize-input .item + input {
 	height: 2.1rem;
 	line-height: 2.1rem;
 }
 
-[data-ui=aui-selector] .selectize-input input + .item {
+[data-interface=aui-selector] .selectize-input input + .item {
 	border-top-color: #DCDCDC;
 	margin-top: 0.1rem;
 }
 
-[data-ui=aui-selector] .item span {
+[data-interface=aui-selector] .item span {
 	display: block;
 }
 
-[data-ui=aui-selector] .destructor {
+[data-interface=aui-selector] .destructor {
 	position: absolute;
 	top: 0.7rem;
 	right: 1rem;
@@ -81,17 +81,17 @@
 	margin: 0;
 }
 
-[data-ui=aui-selector] .destructor:hover {
+[data-interface=aui-selector] .destructor:hover {
 	color: #494949;
 }
 
-[data-ui=aui-selector] .ordering .destructor {
+[data-interface=aui-selector] .ordering .destructor {
 	color: rgba(255, 255, 255, 0.7);
 }
 
 /* Dropdown */
 
-[data-ui=aui-selector] .selectize-dropdown {
+[data-interface=aui-selector] .selectize-dropdown {
 	position: absolute;
 	z-index: 1000;
 	background: #fff;
@@ -103,19 +103,19 @@
 	overflow: hidden;
 }
 
-[data-ui=aui-selector] .selectize-dropdown-content {
+[data-interface=aui-selector] .selectize-dropdown-content {
 	overflow-y: auto;
 	overflow-x: hidden;
 	max-height: 16rem;
 }
 
-[data-ui=aui-selector] .selectize-dropdown .option {
+[data-interface=aui-selector] .selectize-dropdown .option {
 	color: #3D3D3D;
 	padding: 0.8rem 1rem 0.7rem;
 	box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.15);
 }
 
-[data-ui=aui-selector] .selectize-dropdown .active {
+[data-interface=aui-selector] .selectize-dropdown .active {
 	background-color: #668abe;
 	color: #fff;
 	box-shadow: none;

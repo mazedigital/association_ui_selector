@@ -10,17 +10,19 @@
 		var fields;
 
 		var init = function() {
-			fields = Symphony.Elements.contents.find('[data-ui^="aui-selector"]');
+			fields = Symphony.Elements.contents.find('.field[data-interface^="aui-selector"]');
 			fields.each(buildInterface);
 		};
 
 		var buildInterface = function() {
 			var field = $(this),
 				select = field.find('select'),
+				numeric = $.isNumeric(select.find('option[value!=""]:first')),
 				selectize;
 
 			// Apply Selectize
 			select.selectize({
+				sortField: 'text',
 				plugins: {
 					'remove_button': {
 						label : Symphony.Language.get('Remove'),
@@ -34,10 +36,36 @@
 						return '<div class="item"><span>' + escape(data.text) + '</span></div>';
 					}
 				},
+				load: function(query, callback) {
+					if(!query.length) return callback();
+					$.ajax({
+						url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+						data: {
+							field_id: field.data('parent-section-field-id'),
+							query: encodeURIComponent(query)
+						},
+						type: 'GET',
+						error: function() {
+							callback();
+						},
+						success: function(result) {
+							var entries = [];
+
+							$.each(result.entries, function(id, value) {
+								entries.push({
+									value: (numeric === true ? id : value),
+									text: value
+								});
+							});
+
+							callback(entries);
+						}
+					});
+				}
 			});
 
 			// Set placeholder text
-			selectize = select[0].selectize
+			selectize = select[0].selectize;
 			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
 
 			// Make sortable
