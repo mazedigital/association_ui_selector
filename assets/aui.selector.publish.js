@@ -17,7 +17,7 @@
 		var buildInterface = function() {
 			var field = $(this),
 				select = field.find('select'),
-				numeric = $.isNumeric(select.find('option[value!=""]:first')),
+				numeric = $.isNumeric(select.find('option[value!=""]:first').val()),
 				selectize;
 
 			// Apply Selectize
