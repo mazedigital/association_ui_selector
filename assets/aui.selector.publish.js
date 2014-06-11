@@ -42,7 +42,10 @@
 
 			// Apply Selectize
 			storage.selectize({
-				sortField: 'text',
+				sortField: [{
+					field: 'text', 
+					direction: 'asc'
+				}],
 				plugins: {
 					'remove_button': {
 						label : Symphony.Language.get('Remove'),
