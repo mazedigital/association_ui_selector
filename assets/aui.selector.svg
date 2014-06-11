@@ -1,0 +1,6 @@
+<svg width="4" height="9" viewBox="0" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<g id="selector" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+		<path d="M2 5.98L0 9 4 9 2 5.98Z" id="down" fill="#000000" transform="translate(2.000000, 7.500000) scale(1, -1) translate(-2.000000, -7.500000) "/>
+		<path d="M2-0.02L0 3 4 3 2-0.02Z" id="up" fill="#000000"/>
+	</g>
+</svg>
