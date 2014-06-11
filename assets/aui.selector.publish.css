@@ -2,32 +2,58 @@
  * Association UI: Selector 
  */
 
-[data-interface=aui-selector] .selectize-control {
+[data-interface^=aui-selector] .selectize-control {
 	position: relative;
 }
 
-[data-interface=aui-selector] .selectize-input {
+[data-interface^=aui-selector] .selectize-input {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border: 0.1rem solid #C5C5C5;
 	border-radius: 0.4rem;
 	margin-top: 0.2rem;
 	overflow: hidden;
+	position: relative;
+}
+
+[data-interface^=aui-selector] .selectize-input::after {
+	content: '';
+	display: block;
+	width: 2.2rem;
+	height: 3.1rem;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background: url(aui.selector.svg) center no-repeat;
+	opacity: 0.7;
+}
+
+.single[data-interface^=aui-selector] .selectize-input {
+	padding-left: 1rem;
+}
+
+.single[data-interface^=aui-selector] .input-active {
+	border-color: #999999;
 }
 
 /* Items */
 
-[data-interface=aui-selector] .item {
+[data-interface^=aui-selector] .item {
 	color: #3D3D3D;
-	padding: 0.7rem 1rem;
-	border-top: 0.1rem solid transparent;
-	display: block;
-	box-shadow: 0 0.1rem 0 #cccccc, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
-	background-color: #f5f5f5;
+	padding: 0.7rem 0;
 	position: relative;
+	display: inline-block;
 }
 
-[data-interface=aui-selector] .ordering {
+.multiple[data-interface^=aui-selector] .item {
+	padding: 0.7rem 1rem;
+	border-top: 0.1rem solid transparent;
+	box-shadow: 0 0.1rem 0 #cccccc, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
+	background-color: #f5f5f5;
+	display: block;
+}
+
+[data-interface^=aui-selector] .ordering {
 	cursor: move;
 	background-color: #668abe;
 	border-color: #5c83ba !important;
@@ -35,43 +61,69 @@
 	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
 }
 
-[data-interface=aui-selector] .item + .item {
+.multiple[data-interface^=aui-selector] .item + .item {
 	margin-top: 0.1rem;
 	border-top: 0.1rem solid #fafafa;
 }
 
-[data-interface=aui-selector] .selectize-input input {
-	display: block;
-	margin: 0.5rem 0;
+[data-interface^=aui-selector] .selectize-input input {
+	display: inline;
+	margin: 0;
 	padding: 0;
 	height: 2rem;
 	line-height: 2rem;
 	border: none;
 	border-radius: 0.4rem;
 	-webkit-user-select: auto !important;
-	padding: 0 1rem;
 	background-color: transparent;
+}
+
+.single[data-interface^=aui-selector] .selectize-input:not(.has-items) input {
+	margin: 0.5rem 0;
+}
+
+/* Keep placeholder definitions separated, otherwise browsers might not apply the rules */
+.single[data-interface^=aui-selector] .has-items ::-webkit-input-placeholder {
+	color: transparent;
+}
+
+.single[data-interface^=aui-selector] .has-items ::-moz-placeholder {
+	color: transparent;
+}
+
+.single[data-interface^=aui-selector] .has-items :-ms-input-placeholder {
+	color: transparent;
+}
+
+.multiple[data-interface^=aui-selector] .selectize-input input {
+	margin: 0.5rem 0;
+	padding: 0 1rem;
+	display: block;
 	width: 100% !important;
 	position: relative !important;
 	left: 0 !important;
 	opacity: 1 !important;
 }
 
-[data-interface=aui-selector] .selectize-input .item + input {
+[data-interface^=aui-selector] .selectize-input .item + input {
 	height: 2.1rem;
 	line-height: 2.1rem;
 }
 
-[data-interface=aui-selector] .selectize-input input + .item {
+[data-interface^=aui-selector] .selectize-input input + .item {
 	border-top-color: #DCDCDC;
 	margin-top: 0.1rem;
 }
 
-[data-interface=aui-selector] .item span {
+[data-interface^=aui-selector] .item span {
 	display: block;
 }
 
-[data-interface=aui-selector] .destructor {
+[data-interface^=aui-selector] .destructor {
+	display: none;
+}
+
+.multiple[data-interface^=aui-selector] .destructor {
 	position: absolute;
 	top: 0.7rem;
 	right: 1rem;
@@ -79,19 +131,20 @@
 	border-bottom: none;
 	font-weight: normal;
 	margin: 0;
+	display: block;
 }
 
-[data-interface=aui-selector] .destructor:hover {
+.multiple[data-interface^=aui-selector] .destructor:hover {
 	color: #494949;
 }
 
-[data-interface=aui-selector] .ordering .destructor {
+.multiple[data-interface^=aui-selector] .ordering .destructor {
 	color: rgba(255, 255, 255, 0.7);
 }
 
 /* Dropdown */
 
-[data-interface=aui-selector] .selectize-dropdown {
+[data-interface^=aui-selector] .selectize-dropdown {
 	position: absolute;
 	z-index: 1000;
 	background: #fff;
@@ -103,19 +156,19 @@
 	overflow: hidden;
 }
 
-[data-interface=aui-selector] .selectize-dropdown-content {
+[data-interface^=aui-selector] .selectize-dropdown-content {
 	overflow-y: auto;
 	overflow-x: hidden;
 	max-height: 16rem;
 }
 
-[data-interface=aui-selector] .selectize-dropdown .option {
+[data-interface^=aui-selector] .selectize-dropdown .option {
 	color: #3D3D3D;
 	padding: 0.8rem 1rem 0.7rem;
 	box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.15);
 }
 
-[data-interface=aui-selector] .selectize-dropdown .active {
+[data-interface^=aui-selector] .selectize-dropdown .active {
 	background-color: #668abe;
 	color: #fff;
 	box-shadow: none;
