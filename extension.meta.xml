@@ -13,6 +13,11 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="0.2" date="2014-06-11" min="2.4">
+			- Added separate interfaces for single and multiple selects
+			- Added asynchronous search
+			- Added basic layout styles for items
+		</release>
 		<release version="0.1" date="2014-06-04" min="2.4">
 			- Initial release.
 		</release>
