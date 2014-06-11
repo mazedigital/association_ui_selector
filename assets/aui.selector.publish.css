@@ -57,9 +57,9 @@
 	display: block;
 }
 
-[data-interface^=aui-selector] .ordering {
+.multiple[data-interface^=aui-selector] .ordering {
 	cursor: move;
-	background-color: #668abe;
+	background-color: #668abe !important;
 	border-color: #5c83ba !important;
 	color: #fff;
 	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);

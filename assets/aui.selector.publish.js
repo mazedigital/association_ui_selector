@@ -95,7 +95,7 @@
 			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
 
 			// Make sortable
-			if(field.is('[data-ui="aui-selector-sortable"]')) {
+			if(field.is('[data-interface="aui-selector-sortable"]')) {
 				selectize.$control.symphonyOrderable({
 					items: '.item',
 					handles: 'span',
