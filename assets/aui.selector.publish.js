@@ -16,12 +16,32 @@
 
 		var buildInterface = function() {
 			var field = $(this),
-				select = field.find('select'),
-				numeric = $.isNumeric(select.find('option[value!=""]:first').val()),
+				storage = field.find('select:visible, input:visible').first(),
+				multiple = true,
+				numeric = false,
 				selectize;
 
+			// Check for storage element
+			if(!storage.length) {
+				return false;
+			}
+
+			// Get select context
+			if(storage.is('select')) {
+				multiple = storage.is('[multiple="multiple"]');
+				numeric = $.isNumeric(storage.find('option[value!=""]:first').val());
+			}
+
+			// Toggle single or multiple interface
+			if(multiple) {
+				field.addClass('multiple');
+			}
+			else {
+				field.addClass('single');
+			}
+
 			// Apply Selectize
-			select.selectize({
+			storage.selectize({
 				sortField: 'text',
 				plugins: {
 					'remove_button': {
@@ -65,7 +85,7 @@
 			});
 
 			// Set placeholder text
-			selectize = select[0].selectize;
+			selectize = storage[0].selectize;
 			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
 
 			// Make sortable
