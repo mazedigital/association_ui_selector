@@ -57,6 +57,9 @@
 				render: {
 					item: function(data, escape) {
 						return '<div class="item"><span>' + escape(data.text) + '</span></div>';
+					},
+					option: function(data, escape) {
+						return '<div class="option item"><span>' + escape(data.text) + '</span></div>';
 					}
 				},
 				load: function(query, callback) {
