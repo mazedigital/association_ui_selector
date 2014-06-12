@@ -32,7 +32,7 @@
 			// Get select context
 			if(storage.is('select')) {
 				multiple = storage.is('[multiple="multiple"]');
-				numeric = $.isNumeric(storage.find('option[value!=""]:first').val());
+				numeric = (field.data('type') === 'numeric');
 			}
 
 			// Toggle single or multiple interface
