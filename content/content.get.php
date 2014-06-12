@@ -4,14 +4,24 @@ require_once(TOOLKIT . '/class.jsonpage.php');
 
 Class contentExtensionAssociation_ui_selectorGet extends JSONPage
 {
-    
+
     public function view()
     {
         $database = Symphony::Configuration()->get('db', 'database');
-        $field_id = General::sanitize($_GET['field_id']);
-        $field_type = General::sanitize($_GET['field_type']);
+        $field_id = intval(General::sanitize($_GET['field_id']));
         $search = General::sanitize($_GET['query']);
+        $limit = intval(General::sanitize($_GET['limit']));
 
+        // Set limit
+        if ($limit === 0) {
+            $max = '';
+        } elseif (empty($limit)) {
+            $max = ' LIMIT 100';
+        } else {
+            $max = ' LIMIT ' . $limit;
+        }
+
+        // Get entries
         if (!empty($search)) {
 
             // Get columns
@@ -22,28 +32,30 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
                     WHERE table_schema = '%s'
                     AND table_name = 'tbl_entries_data_%d'
                     AND column_name != 'id'
-                    AND column_name != 'entry_id';", 
-                    $database, 
+                    AND column_name != 'entry_id';",
+                    $database,
                     $field_id
                 )
             );
 
             // Build where clauses
             $where = array();
-            foreach($columns as $column) {
+            foreach ($columns as $column) {
                 $where[] = "`$column` LIKE '%$search%'";
             }
 
             // Build query
             $query = sprintf(
-                "SELECT * from sym_entries_data_%d WHERE %s LIMIT 100;",
+                "SELECT * from sym_entries_data_%d WHERE %s%s;",
                 $field_id,
-                implode($where, " OR ")
+                implode($where, " OR "),
+                $max
             );
         } else {
             $query = sprintf(
-                "SELECT * from sym_entries_data_%d LIMIT 100;",
-                $field_id
+                "SELECT * from sym_entries_data_%d%s;",
+                $field_id,
+                $max
             );
         }
 
@@ -62,7 +74,7 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
                     // Get unformatted value
                     $value = $field->prepareExportValue($field_data, ExportableField::UNFORMATTED, $entry_id);
 
-                } else if ($field instanceof ExportableField && in_array(ExportableField::VALUE, $field->getExportModes())) {
+                } elseif ($field instanceof ExportableField && in_array(ExportableField::VALUE, $field->getExportModes())) {
 
                     // Get formatted value
                     $value = $field->prepareExportValue($field_data, ExportableField::VALUE, $entry_id);
@@ -78,9 +90,8 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
             }
         }
 
-
         // Return results
         return $this->_Result['entries'] = $result;
     }
-    
+
 }

@@ -16,9 +16,12 @@
 
 		var buildInterface = function() {
 			var field = $(this),
+				fieldId = field.data('parent-section-field-id'),
 				storage = field.find('select:visible, input:visible').first(),
 				multiple = true,
 				numeric = false,
+				limit = parseInt(field.data('limit')),
+				fetched = false,
 				selectize;
 
 			// Check for storage element
@@ -42,6 +45,7 @@
 
 			// Apply Selectize
 			storage.selectize({
+				preload: (limit === 0),
 				sortField: [{
 					field: 'text', 
 					direction: 'asc'
@@ -63,12 +67,17 @@
 					}
 				},
 				load: function(query, callback) {
-					if(!query.length) return callback();
+					if((!query.length && limit > 0) || fetched === true) {
+						return callback();
+					}
+
+					// Fetch entries
 					$.ajax({
 						url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
 						data: {
-							field_id: field.data('parent-section-field-id'),
-							query: encodeURIComponent(query)
+							field_id: fieldId,
+							query: encodeURIComponent(query),
+							limit: limit
 						},
 						type: 'GET',
 						error: function() {
@@ -85,6 +94,11 @@
 							});
 
 							callback(entries);
+
+							//
+							if(limit === 0) {
+								fetched = true;
+							}
 						}
 					});
 				}
