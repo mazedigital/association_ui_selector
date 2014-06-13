@@ -106,9 +106,12 @@
 					ignore: 'input, textarea, select, a',
 					delay: 250
 				}).on('orderstart.orderable', function() {
-					selectize.close();
+					selectize.$dropdown.css('opacity', 0);
 				}).on('orderstop.orderable', function() {
-					selectize.blur();
+					setTimeout(function() {
+						selectize.blur();
+						selectize.$dropdown.css('opacity', 1);
+					}, 250);
 				});
 			}
 		};
