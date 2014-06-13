@@ -6,17 +6,7 @@
 	position: relative;
 }
 
-[data-interface^=aui-selector] .selectize-input {
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	border: 0.1rem solid #C5C5C5;
-	border-radius: 0.4rem;
-	margin-top: 0.2rem;
-	overflow: hidden;
-	position: relative;
-}
-
-[data-interface^=aui-selector] .selectize-input::after {
+[data-interface^=aui-selector] .selectize-control::after {
 	content: '';
 	display: block;
 	width: 2.2rem;
@@ -26,6 +16,16 @@
 	right: 0;
 	background: url(aui.selector.svg) center no-repeat;
 	opacity: 0.7;
+}
+
+[data-interface^=aui-selector] .selectize-input {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 0.1rem solid #C5C5C5;
+	border-radius: 0.4rem;
+	margin-top: 0.2rem;
+	overflow: hidden;
+	position: relative;
 }
 
 [data-interface^=aui-selector] .single .selectize-input::after {
@@ -47,6 +47,8 @@
 	padding: 0.7rem 0;
 	position: relative;
 	display: inline-block;
+	position: relative;
+	z-index: 100;
 }
 
 [data-interface^=aui-selector] .multi .item {
@@ -215,6 +217,7 @@
 	left: 0;
 	width: 0.5rem;
 	height: 0.8rem;
+	background-image: -webkit-linear-gradient(top, #dadada 0, #dadada 0.1rem, #fafafa 0.1rem);
 	background-image: linear-gradient(to bottom, #dadada 0, #dadada 0.1rem, #fafafa 0.1rem);
 	background-size: 100% 0.2rem;
 	background-repeat: repeat-y;
@@ -226,6 +229,7 @@
 }
 
 [data-interface="aui-selector-sortable"] .multi .item.ordering::before {
+	background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.5) 0.1rem, transparent 0.1rem);
 	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.5) 0.1rem, transparent 0.1rem);
 }
 
