@@ -106,12 +106,23 @@
 					ignore: 'input, textarea, select, a',
 					delay: 250
 				}).on('orderstart.orderable', function() {
+
+					// Hide dropdown
 					selectize.$dropdown.css('opacity', 0);
 				}).on('orderstop.orderable', function() {
+					var values = [];
+
+					// Close and reveal dropdown
 					setTimeout(function() {
 						selectize.blur();
 						selectize.$dropdown.css('opacity', 1);
 					}, 250);
+
+					// Store order
+					selectize.$control.children('[data-value]').each(function() {
+						values.push($(this).attr('data-value'));
+					});
+					selectize.setValue(values);
 				});
 			}
 		};
