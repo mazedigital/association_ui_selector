@@ -28,15 +28,15 @@
 	opacity: 0.7;
 }
 
-.single[data-interface^=aui-selector] .selectize-input::after {
+[data-interface^=aui-selector] .single .selectize-input::after {
 	height: 100%;
 }
 
-.single[data-interface^=aui-selector] .selectize-input {
+[data-interface^=aui-selector] .single .selectize-input {
 	padding-left: 1rem;
 }
 
-.single[data-interface^=aui-selector] .input-active {
+[data-interface^=aui-selector] .single .input-active {
 	border-color: #999999;
 }
 
@@ -49,7 +49,7 @@
 	display: inline-block;
 }
 
-.multiple[data-interface^=aui-selector] .item {
+[data-interface^=aui-selector] .multi .item {
 	padding: 0.7rem 1rem;
 	border-top: 0.1rem solid transparent;
 	box-shadow: 0 0.1rem 0 #cccccc, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
@@ -57,7 +57,7 @@
 	display: block;
 }
 
-.multiple[data-interface^=aui-selector] .ordering {
+[data-interface^=aui-selector] .multi .ordering {
 	cursor: move;
 	background-color: #668abe !important;
 	border-color: #5c83ba !important;
@@ -65,7 +65,7 @@
 	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
 }
 
-.multiple[data-interface^=aui-selector] .item + .item {
+[data-interface^=aui-selector] .multi .item + .item {
 	margin-top: 0.1rem;
 	border-top: 0.1rem solid #fafafa;
 }
@@ -82,24 +82,24 @@
 	background-color: transparent;
 }
 
-.single[data-interface^=aui-selector] .selectize-input:not(.has-items) input {
+[data-interface^=aui-selector] .single .selectize-input:not(.has-items) input {
 	margin: 0.5rem 0;
 }
 
 /* Keep placeholder definitions separated, otherwise browsers might not apply the rules */
-.single[data-interface^=aui-selector] .has-items ::-webkit-input-placeholder {
+[data-interface^=aui-selector] .has-items ::-webkit-input-placeholder {
 	color: transparent;
 }
 
-.single[data-interface^=aui-selector] .has-items ::-moz-placeholder {
+[data-interface^=aui-selector] .single .has-items ::-moz-placeholder {
 	color: transparent;
 }
 
-.single[data-interface^=aui-selector] .has-items :-ms-input-placeholder {
+[data-interface^=aui-selector] .single .has-items :-ms-input-placeholder {
 	color: transparent;
 }
 
-.multiple[data-interface^=aui-selector] .selectize-input input {
+[data-interface^=aui-selector] .multi .selectize-input input {
 	margin: 0.5rem 0;
 	padding: 0 1rem;
 	display: block;
@@ -127,7 +127,7 @@
 	display: none;
 }
 
-.multiple[data-interface^=aui-selector] .destructor {
+[data-interface^=aui-selector] .multi .destructor {
 	position: absolute;
 	top: 0.7rem;
 	right: 1rem;
@@ -138,11 +138,11 @@
 	display: block;
 }
 
-.multiple[data-interface^=aui-selector] .destructor:hover {
+[data-interface^=aui-selector] .multi .destructor:hover {
 	color: #494949;
 }
 
-.multiple[data-interface^=aui-selector] .ordering .destructor {
+[data-interface^=aui-selector] .multi .ordering .destructor {
 	color: rgba(255, 255, 255, 0.7);
 }
 

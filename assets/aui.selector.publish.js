@@ -18,7 +18,6 @@
 			var field = $(this),
 				fieldId = field.data('parent-section-field-id'),
 				storage = field.find('select:visible, input:visible').first(),
-				multiple = true,
 				numeric = false,
 				limit = parseInt(field.data('limit')),
 				fetched = false,
@@ -31,16 +30,7 @@
 
 			// Get select context
 			if(storage.is('select')) {
-				multiple = storage.is('[multiple="multiple"]');
 				numeric = (field.data('type') === 'numeric');
-			}
-
-			// Toggle single or multiple interface
-			if(multiple) {
-				field.addClass('multiple');
-			}
-			else {
-				field.addClass('single');
 			}
 
 			// Apply Selectize
