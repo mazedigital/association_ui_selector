@@ -8,7 +8,7 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
     public function view()
     {
         $database = Symphony::Configuration()->get('db', 'database');
-        $field_id = intval(General::sanitize($_GET['field_id']));
+        $field_ids = explode(',', General::sanitize($_GET['field_id']));
         $search = General::sanitize($_GET['query']);
         $limit = intval(General::sanitize($_GET['limit']));
 
@@ -21,6 +21,16 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
             $max = ' LIMIT ' . $limit;
         }
 
+        foreach($field_ids as $field_id) {
+            $this->get($database, intval($field_id), $search, $max);
+        }
+
+        // Return results
+        return $this->_Result;
+    }
+
+    private function get($database, $field_id, $search, $max)
+    {
         // Get entries
         if (!empty($search)) {
 
@@ -60,7 +70,6 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
         }
 
         // Fetch field values
-        $result = array();
         $data = Symphony::Database()->fetch($query);
 
         if (!empty($data)) {
@@ -86,12 +95,9 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
 
                 }
 
-                $result[$entry_id] = $value;
+                $this->_Result['entries'][$entry_id] = $value;
             }
         }
-
-        // Return results
-        return $this->_Result['entries'] = $result;
     }
 
 }
