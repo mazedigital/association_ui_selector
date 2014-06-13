@@ -3,6 +3,11 @@
  */
 
 [data-interface^=aui-selector] .selectize-control {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	border: 0.1rem solid #C5C5C5;
+	border-radius: 0.4rem;
+	margin-top: 0.2rem;
 	position: relative;
 }
 
@@ -19,13 +24,9 @@
 }
 
 [data-interface^=aui-selector] .selectize-input {
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	border: 0.1rem solid #C5C5C5;
-	border-radius: 0.4rem;
-	margin-top: 0.2rem;
+	margin-top: -0.1rem;
+	border-radius: 0.5em;
 	overflow: hidden;
-	position: relative;
 }
 
 [data-interface^=aui-selector] .single .selectize-input::after {
@@ -52,11 +53,19 @@
 }
 
 [data-interface^=aui-selector] .multi .item {
-	padding: 0.7rem 1rem;
-	border-top: 0.1rem solid transparent;
-	box-shadow: 0 0.1rem 0 #cccccc, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
+	padding: 0.8rem 1rem;
+	box-shadow:;
 	background-color: #f5f5f5;
+	border-top: 0.1rem solid #ccc;
+	box-shadow: inset 0 0.1rem 0 #fff, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
 	display: block;
+	height: 3.3rem;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+[data-interface^=aui-selector] .multi .item + .item {
+	border-top: 0.1rem solid #ccc;
 }
 
 [data-interface^=aui-selector] .multi .ordering {
@@ -67,12 +76,7 @@
 	box-shadow: 0 0.2rem 0.15rem rgba(0, 0, 0, 0.1);
 }
 
-[data-interface^=aui-selector] .multi .item + .item {
-	margin-top: 0.1rem;
-	border-top: 0.1rem solid #fafafa;
-}
-
-[data-interface^=aui-selector] .selectize-input input {
+[data-interface^=aui-selector] .single .selectize-input input {
 	display: inline;
 	margin: 0;
 	padding: 0;
@@ -88,37 +92,21 @@
 	margin: 0.5rem 0;
 }
 
-/* Keep placeholder definitions separated, otherwise browsers might not apply the rules */
-[data-interface^=aui-selector] .has-items ::-webkit-input-placeholder {
-	color: transparent;
-}
-
-[data-interface^=aui-selector] .single .has-items ::-moz-placeholder {
-	color: transparent;
-}
-
-[data-interface^=aui-selector] .single .has-items :-ms-input-placeholder {
-	color: transparent;
-}
-
 [data-interface^=aui-selector] .multi .selectize-input input {
-	margin: 0.5rem 0;
-	padding: 0 1rem;
+	height: 3.3rem;
+	line-height: 2.1rem;
+	margin: 0;
+	padding: 0.6rem 1rem;
 	display: block;
 	width: 100% !important;
 	position: relative !important;
 	left: 0 !important;
 	opacity: 1 !important;
-}
-
-[data-interface^=aui-selector] .selectize-input .item + input {
-	height: 2.1rem;
-	line-height: 2.1rem;
-}
-
-[data-interface^=aui-selector] .selectize-input input + .item {
-	border-top-color: #DCDCDC;
-	margin-top: 0.1rem;
+	-webkit-user-select: auto !important;
+	border: none;
+	border-top: 0.1rem solid #ccc;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 [data-interface^=aui-selector] .item span {
@@ -144,18 +132,36 @@
 	color: #494949;
 }
 
+/* Keep placeholder definitions separated, otherwise browsers might not apply the rules */
+
+[data-interface^=aui-selector] .single .has-items ::-webkit-input-placeholder {
+	color: transparent;
+}
+
+[data-interface^=aui-selector] .single .has-items ::-moz-placeholder {
+	color: transparent;
+}
+
+[data-interface^=aui-selector] .single .has-items :-ms-input-placeholder {
+	color: transparent;
+}
+
 /* Dropdown */
 
 [data-interface^=aui-selector] .selectize-dropdown {
 	position: absolute;
 	z-index: 1000;
 	background: #fff;
-	margin: 0.2rem 0 0 0;
+	margin: 0.3rem 0 0 0;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	box-shadow: inset 0 0 0 0.1rem #C5C5C5, 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
 	border-radius: 0.4rem;
 	overflow: hidden;
+}
+
+[data-interface^=aui-selector] .single .selectize-dropdown {
+	margin-top: 0.2rem;
 }
 
 [data-interface^=aui-selector] .selectize-dropdown-content {
