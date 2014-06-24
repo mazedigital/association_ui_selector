@@ -133,7 +133,7 @@
 		};
 	}();
 
-	$(document).on('ready.orderentries', function() {
+	$(document).on('ready.aui-selector', function() {
 		Symphony.Extensions.AssociationUISelector.init();
 	});
 
