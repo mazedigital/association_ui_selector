@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="0.5.2" date="2014-07-01" min="2.4">
+			- Fixed placeholder sizing and positioning
+		</release>
 		<release version="0.5.1" date="2014-06-24" min="2.4">
 			- Code clean-up
 		</release>

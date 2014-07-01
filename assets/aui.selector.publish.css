@@ -90,6 +90,9 @@
 
 [data-interface^=aui-selector] .single .selectize-input:not(.has-items) input {
 	margin: 0.5rem 0;
+	position: relative !important;
+	left: 0 !important;
+	width: 100% !important;
 }
 
 [data-interface^=aui-selector] .multi .selectize-input input {
