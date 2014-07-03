@@ -56,7 +56,7 @@
 	display: block;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	height: 3.3rem;
+	min-height: 3.3rem;
 	padding: 0.8rem 1rem;
 	border-top: 0.1rem solid #ccc;
 	background-color: #f5f5f5;

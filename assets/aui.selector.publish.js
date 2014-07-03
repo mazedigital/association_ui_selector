@@ -49,48 +49,21 @@
 				},
 				hideSelected: true,
 				render: {
-					item: function(data, escape) {
-						return '<div class="item"><span>' + data.text + '</span></div>';
-					},
-					option: function(data, escape) {
-						return '<div class="option"><span>' + data.text + '</span></div>';
-					}
+					item: renderItem,
+					option: renderOption
 				},
 				load: function(query, callback) {
 					if((!query.length && limit > 0) || fetched === true) {
 						return callback();
 					}
 
-					// Fetch entries
-					$.ajax({
-						url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
-						data: {
-							field_id: fieldId,
-							query: encodeURIComponent(query),
-							limit: limit
-						},
-						type: 'GET',
-						error: function() {
-							callback();
-						},
-						success: function(result) {
-							var entries = [];
+					// Fetch search options
+					fetchOptions(fieldId, query, limit, numeric, callback);
 
-							$.each(result.entries, function(id, value) {
-								entries.push({
-									value: (numeric === true ? id : value),
-									text: value
-								});
-							});
-
-							callback(entries);
-
-							//
-							if(limit === 0) {
-								fetched = true;
-							}
-						}
-					});
+					// Only fetch full list of option once
+					if(limit === 0) {
+						fetched = true;
+					}
 				}
 			});
 
@@ -105,26 +78,67 @@
 					handles: 'span',
 					ignore: 'input, textarea, select, a',
 					delay: 250
-				}).on('orderstart.orderable', function() {
-
-					// Hide dropdown
-					selectize.$dropdown.css('opacity', 0);
-				}).on('orderstop.orderable', function() {
-					var values = [];
-
-					// Close and reveal dropdown
-					setTimeout(function() {
-						selectize.blur();
-						selectize.$dropdown.css('opacity', 1);
-					}, 250);
-
-					// Store order
-					selectize.$control.children('[data-value]').each(function() {
-						values.push($(this).attr('data-value'));
-					});
-					selectize.setValue(values);
 				});
+				selectize.$control.on('orderstart.orderable', orderStart);
+				selectize.$control.on('orderstop.orderable', orderStop);
 			}
+		};
+
+		var fetchOptions = function(fieldId, query, limit, numeric, callback) {
+			$.ajax({
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+				data: {
+					field_id: fieldId,
+					query: encodeURIComponent(query),
+					limit: limit
+				},
+				type: 'GET',
+				error: function() {
+					callback();
+				},
+				success: function(result) {
+					var entries = [];
+
+					$.each(result.entries, function(id, value) {
+						entries.push({
+							value: (numeric === true ? id : value),
+							text: value
+						});
+					});
+
+					callback(entries);
+				}
+			});
+		};
+
+		var renderItem = function(data, escape) {
+			return '<div class="item"><span>' + data.text + '</span></div>';
+		};
+
+		var renderOption = function(data, escape) {
+			return '<div class="option"><span>' + data.text + '</span></div>';
+		};
+
+		var orderStart = function() {
+
+			// Hide dropdown
+			selectize.$dropdown.css('opacity', 0);
+		};
+
+		var orderStop = function() {
+			var values = [];
+
+			// Close and reveal dropdown
+			setTimeout(function() {
+				selectize.blur();
+				selectize.$dropdown.css('opacity', 1);
+			}, 250);
+
+			// Store order
+			selectize.$control.children('[data-value]').each(function() {
+				values.push($(this).attr('data-value'));
+			});
+			selectize.setValue(values);
 		};
 
 		// API

@@ -13,6 +13,10 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.0beta" date="2014-07-03" min="2.4">
+			- General clean-up
+			- Prepared first release
+		</release>
 		<release version="0.5.2" date="2014-07-01" min="2.4">
 			- Fixed placeholder sizing and positioning
 		</release>
