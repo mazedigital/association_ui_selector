@@ -123,13 +123,13 @@
 			return '<div class="option"><span>' + data.text + '</span></div>';
 		};
 
-		var orderStart = function() {
+		var orderStart = function(selectize) {
 
 			// Hide dropdown
 			selectize.$dropdown.css('opacity', 0);
 		};
 
-		var orderStop = function() {
+		var orderStop = function(selectize) {
 			var values = [];
 
 			// Close and reveal dropdown
