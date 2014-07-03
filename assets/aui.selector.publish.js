@@ -79,8 +79,12 @@
 					ignore: 'input, textarea, select, a',
 					delay: 250
 				});
-				selectize.$control.on('orderstart.orderable', orderStart);
-				selectize.$control.on('orderstop.orderable', orderStop);
+				selectize.$control.on('orderstart.orderable', function() {
+					orderStart(selectize);
+				});
+				selectize.$control.on('orderstop.orderable', function() {
+					orderStop(selectize);
+				});
 			}
 		};
 
