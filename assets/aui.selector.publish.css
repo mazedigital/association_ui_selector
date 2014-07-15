@@ -9,6 +9,7 @@
 	margin-top: 0.2rem;
 	border: 0.1rem solid #c5c5c5;
 	border-radius: 0.4rem;
+	background: #fff;
 }
 
 [data-interface^=aui-selector] .selectize-control::after {
