@@ -52,6 +52,11 @@
 					item: renderItem,
 					option: renderOption
 				},
+				onInitialize: function() {
+					var items = this.$control.find('.item');
+
+					initExistingItems(items, numeric);
+				},
 				load: function(query, callback) {
 					if((!query.length && limit > 0) || fetched === true) {
 						return callback();
@@ -88,6 +93,56 @@
 			}
 		};
 
+		var initExistingItems = function(items, numeric) {
+			if(numeric === true) {
+				items.each(fetchItemByID);
+			}
+			else {
+				items.each(fetchItemByValue);
+			}
+		}
+
+		var fetchItemByID = function(index, item) {
+			var item = $(item),
+				id = item.data('value');
+
+			$.ajax({
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/link/',
+				data: {
+					entry_id: id
+				},
+				type: 'GET',
+				success: function(result) {
+					item.attr('data-entry-id', id);
+					item.attr('data-section-handle', result.entry.section);
+					item.attr('data-link', result.entry.link);
+				}
+			});
+		}
+
+		var fetchItemByValue = function(index, item) {
+			var item = $(item),
+				fieldId = item.parents('.field').data('parent-section-field-id'),
+				id = item.data('value');
+
+			$.ajax({
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+				data: {
+					field_id: fieldId,
+					query: item.data('value'),
+					limit: 1
+				},
+				type: 'GET',
+				success: function(result) {
+					$.each(result.entries, function(id, data) {
+						item.attr('data-entry-id', id);
+						item.attr('data-section-handle', data.section);
+						item.attr('data-link', data.link);
+					});
+				}
+			});
+		}
+
 		var fetchOptions = function(fieldId, query, limit, numeric, callback) {
 			$.ajax({
 				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
@@ -103,10 +158,13 @@
 				success: function(result) {
 					var entries = [];
 
-					$.each(result.entries, function(id, value) {
+					$.each(result.entries, function(id, data) {
 						entries.push({
-							value: (numeric === true ? id : value),
-							text: value
+							value: (numeric === true ? id : data.value),
+							text: data.value,
+							section: data.section,
+							link: data.link,
+							id: id
 						});
 					});
 
@@ -116,7 +174,7 @@
 		};
 
 		var renderItem = function(data, escape) {
-			return '<div class="item"><span>' + data.text + '</span></div>';
+			return '<div class="item" data-section-handle="' + data.section + '" data-link="' + data.link + '" data-entry-id="' + data.id + '"><span>' + data.text + '</span></div>';
 		};
 
 		var renderOption = function(data, escape) {

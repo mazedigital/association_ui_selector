@@ -74,6 +74,8 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
 
         if (!empty($data)) {
             $field = FieldManager::fetch($field_id);
+            $parent_section = SectionManager::fetch($field->get('parent_section'));
+            $parent_section_handle = $parent_section->get('handle');
 
             foreach ($data as $field_data) {
                 $entry_id = $field_data['entry_id'];
@@ -95,7 +97,9 @@ Class contentExtensionAssociation_ui_selectorGet extends JSONPage
 
                 }
 
-                $this->_Result['entries'][$entry_id] = $value;
+                $this->_Result['entries'][$entry_id]['value'] = $value;
+                $this->_Result['entries'][$entry_id]['section'] = $parent_section_handle;
+                $this->_Result['entries'][$entry_id]['link'] = APPLICATION_URL . '/publish/' . $parent_section_handle . '/edit/' . $entry_id . '/';
             }
         }
     }
