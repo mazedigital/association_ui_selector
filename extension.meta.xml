@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.0beta3" date="2014-07-29" min="2.5">
+			- Enable external item additions and updates
+		</release>
 		<release version="1.0.0beta2" date="2014-07-23" min="2.5">
 			- Enlarged click area for draggable items
 			- Increased browser compatibility
