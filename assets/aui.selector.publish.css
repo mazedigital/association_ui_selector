@@ -19,7 +19,7 @@
 	right: 0;
 	bottom: 0;
 	width: 2.2rem;
-	height: 3.1rem;
+	height: 100%;
 	background: url(aui.selector.svg) center no-repeat;
 	opacity: 0.7;
 }
@@ -50,6 +50,12 @@
 	position: relative;
 	color: #3d3d3d;
 	z-index: 100;
+}
+
+[data-interface^=aui-selector] .item::after {
+	content: '';
+	display: block;
+	clear: both;
 }
 
 [data-interface^=aui-selector] .multi .item {
@@ -181,6 +187,7 @@
 }
 
 [data-interface^=aui-selector] .selectize-dropdown .option {
+	overflow: hidden;
 	width: 100%;
 	padding: 0.8rem 1rem 0.7rem;
 	color: #3d3d3d;
@@ -204,8 +211,16 @@
 [data-interface^=aui-selector] .item img,
 [data-interface^=aui-selector] .selectize-dropdown .option img {
 	float: left;
-	margin: -0.2rem 1rem -0.2rem 0;
+	margin: -0.2rem 1rem 0.4rem 0;
 	border: 0.1rem solid rgba(0, 0, 0, 0.2);
+}
+
+[data-interface^=aui-selector] .multi .item img {
+	margin-bottom: 0.5rem;
+}
+
+[data-interface^=aui-selector] .selectize-dropdown .option img {
+	margin-bottom: 0;
 }
 
 [data-interface^=aui-selector] .item em,
@@ -230,10 +245,11 @@
 	content: '';
 	display: block;
 	position: absolute;
-	top: 1.2rem;
+	top: 50%;
 	left: 0;
 	width: 0.5rem;
 	height: 0.8rem;
+	margin-top: -0.25rem;
 	pointer-events: none;
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #dadada), color-stop(0.1rem, #dadada), color-stop(0.1rem, #fafafa));
 	background-image: -webkit-linear-gradient(top, #dadada 0, #dadada 0.1rem, #fafafa 0.1rem);
