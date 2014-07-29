@@ -95,14 +95,14 @@
 
 		var initExistingItems = function(items, numeric) {
 			if(numeric === true) {
-				items.each(fetchItemByID);
+				items.each(updateItemByID);
 			}
 			else {
-				items.each(fetchItemByValue);
+				items.each(updateItemByValue);
 			}
 		}
 
-		var fetchItemByID = function() {
+		var updateItemByID = function() {
 			var item = $(this),
 				entryId = item.attr('data-entry-id'), 
 				fieldId;
@@ -133,7 +133,7 @@
 			});
 		}
 
-		var fetchItemByValue = function(index, item) {
+		var updateItemByValue = function(index, item) {
 			var item = $(item),
 				fieldId = item.parents('.field').data('parent-section-field-id'),
 				id = item.data('value');
@@ -155,6 +155,26 @@
 				}
 			});
 		}
+
+		var fetchItem = function(entryId, fieldId, numeric, callback) {
+			$.ajax({
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+				data: {
+					entry_id: entryId,
+					field_id: fieldId
+				},
+				type: 'GET',
+				success: function(result) {
+					callback({
+						value: (numeric === true ? entryId : result.entry.value),
+						text: result.entry.value,
+						section: result.entry.section,
+						link: result.entry.link,
+						id: entryId
+					});
+				}
+			});
+		};
 
 		var fetchOptions = function(fieldId, query, limit, numeric, callback) {
 			$.ajax({
@@ -217,20 +237,21 @@
 		};
 
 		var updateItem = function(id) {
-			fields.find('.item[data-entry-id="' + id + '"]').each(fetchItemByID);
+			fields.find('.item[data-entry-id="' + id + '"]').each(updateItemByID);
 		};
 
 		var addItem = function(field, id) {
-			var storage = field.find('.selectized'),
+			var fieldId = field.attr('data-parent-section-field-id'),
+				numeric = (field.attr('data-type') === 'numeric'),
+				storage = field.find('.selectized'),
 				selectize = storage[0].selectize;
 
-			selectize.settings.create = true;
-			selectize.addOption({
-				text: Symphony.Language.get('Loading') + ' …',
-				value: id
+			fetchItem(id, fieldId, numeric, function(data) {
+				selectize.settings.create = true;
+				selectize.addOption(data);
+				selectize.addItem(data.value);
+				selectize.settings.create = false;
 			});
-			selectize.addItem(id);
-			selectize.settings.create = false;
 		};
 
 		// API
