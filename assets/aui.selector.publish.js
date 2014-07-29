@@ -102,20 +102,33 @@
 			}
 		}
 
-		var fetchItemByID = function(index, item) {
-			var item = $(item),
-				id = item.data('value');
+		var fetchItemByID = function() {
+			var item = $(this),
+				entryId = item.attr('data-entry-id'), 
+				fieldId;
+
+			if(isNaN(entryId)) {
+				entryId = item.data('value');
+			}
+			else {
+				fieldId = item.parents('.field').data('parent-section-field-id');
+			}
 
 			$.ajax({
-				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/link/',
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
 				data: {
-					entry_id: id
+					entry_id: entryId,
+					field_id: fieldId
 				},
 				type: 'GET',
 				success: function(result) {
-					item.attr('data-entry-id', id);
+					item.attr('data-entry-id', entryId);
 					item.attr('data-section-handle', result.entry.section);
 					item.attr('data-link', result.entry.link);
+
+					if(result.entry.value != '') {
+						item.find('span').html(result.entry.value);
+					}
 				}
 			});
 		}
@@ -126,7 +139,7 @@
 				id = item.data('value');
 
 			$.ajax({
-				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
 				data: {
 					field_id: fieldId,
 					query: item.data('value'),
@@ -145,7 +158,7 @@
 
 		var fetchOptions = function(fieldId, query, limit, numeric, callback) {
 			$.ajax({
-				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/get/',
+				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
 				data: {
 					field_id: fieldId,
 					query: encodeURIComponent(query),
@@ -203,9 +216,28 @@
 			selectize.setValue(values);
 		};
 
+		var updateItem = function(id) {
+			fields.find('.item[data-entry-id="' + id + '"]').each(fetchItemByID);
+		};
+
+		var addItem = function(field, id) {
+			var storage = field.find('.selectized'),
+				selectize = storage[0].selectize;
+
+			selectize.settings.create = true;
+			selectize.addOption({
+				text: Symphony.Language.get('Loading') + ' …',
+				value: id
+			});
+			selectize.addItem(id);
+			selectize.settings.create = false;
+		};
+
 		// API
 		return {
-			init: init
+			init: init,
+			update: updateItem,
+			add: addItem
 		};
 	}();
 
