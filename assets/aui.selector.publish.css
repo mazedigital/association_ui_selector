@@ -24,6 +24,10 @@
 	opacity: 0.7;
 }
 
+[data-interface^=aui-selector] .selectize-control.multi::after {
+	height: 3.1rem;
+}
+
 [data-interface^=aui-selector] .selectize-input {
 	overflow: hidden;
 	margin-top: -0.1rem;
