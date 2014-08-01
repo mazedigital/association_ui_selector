@@ -13,6 +13,10 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.0beta4" date="2014-08-01" min="2.5">
+			- Fixed data inconsitencies
+			- Fixed overlapping content
+		</release>
 		<release version="1.0.0beta3" date="2014-07-29" min="2.5">
 			- Enabled external item additions and updates
 		</release>
