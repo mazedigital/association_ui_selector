@@ -4,6 +4,14 @@
 
 Selector provides a search and select interface for associative Symphony fields. It works with core select boxes and tag lists as well as with [Association fields](https://github.com/symphonists/association_field).
 
+### Installation
+
+1. Upload Selector to your `extensions` folder.
+2. Enable Selector in the backend.
+3. Add an associative field to your section and choose one of the interface.
+
+Please keep in mind that interface are only available in combination with dynamic values, if you are using default select boxes or tag lists.
+
 #### Modes
 
 There are two modes:
