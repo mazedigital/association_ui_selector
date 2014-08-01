@@ -57,6 +57,11 @@
 
 					initExistingItems(items, numeric);
 				},
+				onItemAdd: function(value, item) {
+					if(isNaN(item.attr('data-entry-id'))) {
+						initExistingItems(item, numeric);
+					}
+				},
 				load: function(query, callback) {
 					if((!query.length && limit > 0) || fetched === true) {
 						return callback();
