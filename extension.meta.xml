@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.0.0RC" date="2014-08-01" min="2.5">
+			- Updated installation information in the readme
+		</release>
 		<release version="1.0.0beta4" date="2014-08-01" min="2.5">
 			- Fixed data inconsitencies
 			- Fixed overlapping content
