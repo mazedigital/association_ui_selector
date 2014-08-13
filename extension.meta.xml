@@ -13,49 +13,8 @@
 		</author>
 	</authors>
 	<releases>
-		<release version="1.0.0RC" date="2014-08-01" min="2.5">
-			- Updated installation information in the readme
-		</release>
-		<release version="1.0.0beta4" date="2014-08-01" min="2.5">
-			- Fixed data inconsitencies
-			- Fixed overlapping content
-		</release>
-		<release version="1.0.0beta3" date="2014-07-29" min="2.5">
-			- Enabled external item additions and updates
-		</release>
-		<release version="1.0.0beta2" date="2014-07-23" min="2.5">
-			- Enlarged click area for draggable items
-			- Increased browser compatibility
-		</release>
-		<release version="1.0.0beta" date="2014-07-03" min="2.4">
-			- General clean-up
-			- Prepared first release
-		</release>
-		<release version="0.5.2" date="2014-07-01" min="2.4">
-			- Fixed placeholder sizing and positioning
-		</release>
-		<release version="0.5.1" date="2014-06-24" min="2.4">
-			- Code clean-up
-		</release>
-		<release version="0.5.0" date="2014-06-13" min="2.4">
-			- Added various UI improvements
-		</release>
-		<release version="0.4.0" date="2014-06-13" min="2.4">
-			- Added support for multiple associated sections
-		</release>
-		<release version="0.3.1" date="2014-06-12" min="2.4">
-			- Fixed check for numeric values
-		</release>
-		<release version="0.3.0" date="2014-06-12" min="2.4">
-			- Added custom limits for entry search results (requires Association Field 0.2.0)
-		</release>
-		<release version="0.2.0" date="2014-06-11" min="2.4">
-			- Added separate interfaces for single and multiple selects
-			- Added asynchronous search
-			- Added basic layout styles for items
-		</release>
-		<release version="0.1.0" date="2014-06-04" min="2.4">
-			- Initial release.
+		<release version="1.0.0" date="2014-08-13" min="2.5">
+			- First release
 		</release>
 	</releases>
 </extension>
