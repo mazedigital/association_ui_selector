@@ -123,11 +123,17 @@
 	-webkit-user-select: auto !important;
 }
 
+[data-interface^=aui-selector] .multi .selectize-input:not(.has-items) input {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	height: 3rem;
+}
+
 [data-interface^=aui-selector] .item span {
 	display: block;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	padding: 0.7rem 1rem;
+	padding: 0.7rem 1rem 0.6rem;
 }
 
 [data-interface^=aui-selector] .multi .item span {
@@ -174,7 +180,7 @@
 	overflow: hidden;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	margin: 0.3rem 0 0 0;
+	margin: 0.2rem 0 0 0;
 	border-radius: 0.4rem;
 	background: #fff;
 	box-shadow: inset 0 0 0 0.1rem #c5c5c5, 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
@@ -182,7 +188,7 @@
 }
 
 [data-interface^=aui-selector] .single .selectize-dropdown {
-	margin-top: 0.2rem;
+	margin-top: 0.3rem;
 }
 
 [data-interface^=aui-selector] .selectize-dropdown-content {
