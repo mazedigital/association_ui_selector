@@ -38,7 +38,7 @@
 	height: 100%;
 }
 
-[data-interface^=aui-selector] .single .selectize-input {
+[data-interface^=aui-selector] .single .selectize-input.not-full {
 	padding-left: 1rem;
 }
 
