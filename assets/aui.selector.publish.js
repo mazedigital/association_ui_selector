@@ -96,6 +96,14 @@
 					orderStop(selectize);
 				});
 			}
+
+			// Hide dropdown after item removal
+			selectize.$control.on('mousedown', '.destructor', function() {
+				toggleDropdownVisibility(selectize);
+			});
+			selectize.$control.on('mouseup', '.destructor', function() {
+				toggleDropdownVisibility(selectize, true);
+			});
 		};
 
 		var initExistingItems = function(items, numeric) {
@@ -220,19 +228,14 @@
 		};
 
 		var orderStart = function(selectize) {
-
-			// Hide dropdown
-			selectize.$dropdown.css('opacity', 0);
+			toggleDropdownVisibility(selectize);
 		};
 
 		var orderStop = function(selectize) {
 			var values = [];
 
 			// Close and reveal dropdown
-			setTimeout(function() {
-				selectize.blur();
-				selectize.$dropdown.css('opacity', 1);
-			}, 250);
+			toggleDropdownVisibility(selectize, true);
 
 			// Store order
 			selectize.$control.children('[data-value]').each(function() {
@@ -257,6 +260,17 @@
 				selectize.addItem(data.value);
 				selectize.settings.create = false;
 			});
+		};
+
+		var toggleDropdownVisibility = function(selectize, show) {
+			if(show === true) {
+				setTimeout(function() {
+					selectize.blur();
+					selectize.$dropdown.css('opacity', 1);
+				}, 250);			}
+			else {
+				selectize.$dropdown.css('opacity', 0);
+			}
 		};
 
 		// API
