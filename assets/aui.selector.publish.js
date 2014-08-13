@@ -79,7 +79,7 @@
 
 			// Set placeholder text
 			selectize = storage[0].selectize;
-			selectize.$control_input.attr('placeholder', 'Search and select' + ' …');
+			selectize.$control_input.attr('placeholder', Symphony.Language.get('Search and select') + ' …');
 
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
