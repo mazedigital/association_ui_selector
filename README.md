@@ -39,7 +39,7 @@ If you want to display in image thumbnail you can make use of JIT. An image size
 
 ##### Reflection field with XSLT-utility
 
-For more complex needs Reflection field let’s you use an XSLT-utility. Here’s an example that formats biographic-data nicely based on if data is available in a specific entry. The Reflection field expression is simply:
+For more complex needs Reflection field lets you use an XSLT-utility. Here’s an example that formats biographic-data nicely based on if data is available in a specific entry. The Reflection field expression is simply:
 
     {person}
     
