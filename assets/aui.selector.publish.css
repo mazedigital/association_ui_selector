@@ -197,12 +197,17 @@
 	max-height: 16rem;
 }
 
+[data-interface^=aui-selector] .selectize-dropdown .optgroup,
 [data-interface^=aui-selector] .selectize-dropdown .option {
 	overflow: hidden;
 	width: 100%;
 	padding: 0.8rem 1rem 0.7rem;
 	color: #3d3d3d;
 	box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.15);
+}
+
+[data-interface^=aui-selector] .selectize-dropdown .optgroup {
+	font-weight: bold;
 }
 
 [data-interface^=aui-selector] .selectize-dropdown .active {
