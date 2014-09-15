@@ -81,6 +81,11 @@
 			selectize = storage[0].selectize;
 			selectize.$control_input.attr('placeholder', Symphony.Language.get('Search and select') + ' …');
 
+			// Don't auto-focus the input in multiple mode
+			if(storage.is('[multiple]')) {
+				selectize.$control.off('mousedown');
+			}
+	
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
 				selectize.$control.symphonyOrderable({
