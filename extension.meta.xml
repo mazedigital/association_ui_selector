@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.1.0" date="2014-08-14" min="2.5">
+			- Added German tranlation
+		</release>
 		<release version="1.0.0" date="2014-08-13" min="2.5">
 			- First release
 		</release>

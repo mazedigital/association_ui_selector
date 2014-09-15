@@ -25,7 +25,77 @@ Sorting is currently only available for [Association fields](https://github.com/
 
 #### Custom Captions
 
-It's possible to include markup in your related field in order to create more informative item captions. Selector bundles styles for text, image previews and emphasis. If you'd like to combine multiple field values into a single caption, please take a look at [Reflection field](https://github.com/symphonists/reflectionfield).
+It’s possible to include markup in your related field in order to create more informative item captions. Selector bundles styles for text, image previews and emphasis. If you’d like to combine multiple field values into a single caption, please take a look at [Reflection field](https://github.com/symphonists/reflectionfield).
+
+##### Basic Reflection field expressions
+
+You can create a second row with a standard `<br />`. Emphasized text will be displayed in grey. The Reflection field can access fields by `entry/[fieldname]`. For example:
+
+```xsl
+{entry/title}<br/><em>{entry/upload/filename}</em>
+```
+
+If you want to display an image thumbnail you can make use of JIT. An image size of 35×35px works best. Using [this Reflection field fork](https://github.com/orchard-studio/reflectionfield/commit/55095a959edee25f6306718302404060dad58cb5) mentioned [here](http://www.getsymphony.com/discuss/thread/106489/4/#position-65), you can use `{root}` to create a dynamic URL:
+
+```xml
+<img src='{root}/image/2/35/35/5/{entry/upload/filename}' /> {entry/title}<br/><em>{entry/upload/filename}</em>
+```
+
+##### Reflection field with XSLT-utility
+
+For more complex needs Reflection field lets you use an XSLT-utility. Here’s an example that formats biographic-data nicely based on if data is available in a specific entry. The Reflection field expression is simply:
+
+```xml
+{person}
+```
+    
+The XSLT-utility needs to be in the `workspace/utilities` folder. It will be selectable in the Reflection field settings:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="data/entry">
+    <data>
+        <xsl:element name="person">
+            <!-- Image thumbnail will only created if an image is present in the current entry -->
+            <xsl:if test="image/filename">
+                <!-- in order to make HTML-output work here wen need to warp the code elements in CDATA tags (thanks John :) -->
+                <xsl:text><![CDATA[<img src=']]></xsl:text>
+                <!-- I’m using a fork with a root-pseudo-parameter here. See https://github.com/animaux/reflectionfield/commit/2d10a65c5f9d0ed59f8c211863808471b90a3376 -->
+                <xsl:value-of select="//params/root"/>
+                <xsl:text>/image/2/35/35/5</xsl:text>
+                <xsl:value-of select="image/@path"/>
+                <xsl:text>/</xsl:text>
+                <xsl:value-of select="image/filename"/>
+                <xsl:text><![CDATA['/>]]></xsl:text>
+            </xsl:if>
+            <!-- Name expects first and last name to be mandatory -->
+            <xsl:value-of select="firstname"/>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="lastname"/>
+            <!-- Biographic data checks for existing data and adds an asterisk if only date of birth is present, and a cross if only date of death is present -->
+            <xsl:if test="year_of_birth!= '' or year_of_death != ''">
+                <xsl:text><![CDATA[<br/><em>]]></xsl:text>
+                <xsl:choose>
+                    <xsl:when test="year_of_birth != '' and year_of_death != ''">
+                        <xsl:value-of select="year_of_birth/text()"/>–<xsl:value-of select="year_of_death/text()"/>
+                    </xsl:when>
+                    <xsl:when test="year_of_death = '' and year_of_birth != ''">
+                        *<xsl:value-of select="year_of_birth/text()"/>
+                    </xsl:when>
+                    <xsl:when test="year_of_birth = '' and year_of_death != ''">
+                        †<xsl:value-of select="year_of_death/text()"/>
+                    </xsl:when>
+                </xsl:choose>
+                <xsl:text><![CDATA[</em>]]></xsl:text>
+            </xsl:if>
+        </xsl:element>
+    </data>
+</xsl:template>
+
+</xsl:stylesheet>
+```
 
 ### Acknowledgement
 

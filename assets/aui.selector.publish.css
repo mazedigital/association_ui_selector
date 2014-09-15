@@ -138,6 +138,7 @@
 
 [data-interface^=aui-selector] .multi .item span {
 	padding: 0.8rem 1rem;
+	white-space: normal;
 }
 
 [data-interface^=aui-selector] .destructor {
