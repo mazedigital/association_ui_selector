@@ -14,14 +14,46 @@
 			fields.each(buildInterface);
 		};
 
+		var updateFilters = function(id,newfilters) {
+			fields.each(function(){
+				var field = $(this); 
+				if (field.attr('id') == "field-" + id){
+					field.data("filters",newfilters);
+					var storage = field.find('.selectized'),
+						selectize = storage[0].selectize,
+						fieldId = field.data('parent-section-field-id'),
+						limit = parseInt(field.data('limit')),
+						numeric = true;
+					//clear existing options as filters have changed
+					selectize.clearOptions();
+					fetchOptions(fieldId, "", newfilters, limit, numeric, function(entries){ 
+						$.each(entries,function(index, entry){ 
+							console.log(entry);
+							selectize.addOption(entry);
+						});
+					 });
+				}
+			});
+		};
+
 		var buildInterface = function() {
 			var field = $(this),
 				fieldId = field.data('parent-section-field-id'),
+				filters = {},
 				storage = field.find('select:visible, input:visible').first(),
 				numeric = false,
 				limit = parseInt(field.data('limit')),
 				fetched = false,
 				selectize;
+
+			$.each(field.data(),function(index, value){ 
+				if (index.indexOf("filter") == 0 ){
+					var filter = index.substring(6).toLowerCase();
+					filters[filter] = value;
+				}
+			});
+
+			field.data("filters",filters);
 
 			// Check for storage element
 			if(!storage.length) {
@@ -67,8 +99,10 @@
 						return callback();
 					}
 
+					filters = this.$wrapper.closest('.field').data('filters');
+
 					// Fetch search options
-					fetchOptions(fieldId, query, limit, numeric, callback);
+					fetchOptions(fieldId, query, filters, limit, numeric, callback);
 
 					// Only fetch full list of option once
 					if(limit === 0) {
@@ -194,12 +228,13 @@
 			});
 		};
 
-		var fetchOptions = function(fieldId, query, limit, numeric, callback) {
+		var fetchOptions = function(fieldId, query, filters, limit, numeric, callback) {
 			$.ajax({
 				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
 				data: {
 					field_id: fieldId,
 					query: encodeURIComponent(query),
+					filter: filters,
 					limit: limit
 				},
 				type: 'GET',
@@ -281,6 +316,7 @@
 		// API
 		return {
 			init: init,
+			updateFilters: updateFilters,
 			update: updateItem,
 			add: addItem
 		};

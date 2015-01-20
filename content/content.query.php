@@ -11,6 +11,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         $field_ids = explode(',', General::sanitize($_GET['field_id']));
         $search = General::sanitize($_GET['query']);
         $limit = intval(General::sanitize($_GET['limit']));
+        $filters = $_GET['filter'];
 
         // Set limit
         if ($limit === 0) {
@@ -22,15 +23,45 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         }
 
         foreach($field_ids as $field_id) {
-            $this->get($database, intval($field_id), $search, $max);
+            $this->get($database, intval($field_id), $search, $max, $filters);
         }
 
         // Return results
         return $this->_Result;
     }
 
-    private function get($database, $field_id, $search, $max)
+    private function get($database, $field_id, $search, $max, $filters)
     {
+
+        if (!empty($filters)) {
+            // Build Filters
+            $field = FieldManager::fetch($field_id);
+            $section_id = $field->get('parent_section');
+
+            $whereFilters = '';
+            $joins = ' JOIN tbl_entries AS e ON (e.id = ed.entry_id)';
+
+            foreach ($filters as $handle => $value) {
+                if (!is_array($value)) {
+                    $filter_type = Datasource::determineFilterType($value);
+                    $value = preg_split('/'.($filter_type == Datasource::FILTER_AND ? '\+' : '(?<!\\\\),').'\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                    $value = array_map('trim', $value);
+                    $value = array_map(array('Datasource', 'removeEscapedCommas'), $value);
+                }
+
+                $handle = Symphony::Database()->cleanValue($handle);
+                $filter_id = FieldManager::fetchFieldIDFromElementName($handle,$section_id);
+
+                $field = FieldManager::fetch($filter_id);
+                if ($field instanceof Field) {
+                    $field->buildDSRetrievalSQL($value, $joins, $whereFilters, ($filter_type == Datasource::FILTER_AND ? true : false));
+                }
+            }
+        } else{
+            $whereFilters = '';
+            $joins = '';
+        }
+
         // Get entries
         if (!empty($search)) {
 
@@ -51,20 +82,25 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
             // Build where clauses
             $where = array();
             foreach ($columns as $column) {
-                $where[] = "`$column` LIKE '%$search%'";
+                $where[] = "ed.`$column` LIKE '%$search%'";
             }
 
             // Build query
             $query = sprintf(
-                "SELECT * from sym_entries_data_%d WHERE %s%s;",
+                "SELECT ed.* from tbl_entries_data_%d AS ed %s WHERE (%s) %s %s;",
                 $field_id,
+                $joins,
                 implode($where, " OR "),
+                $whereFilters,
                 $max
             );
+            
         } else {
             $query = sprintf(
-                "SELECT * from sym_entries_data_%d%s;",
+                "SELECT ed.* from tbl_entries_data_%d AS ed %s WHERE 1 %s %s;",
                 $field_id,
+                $joins,
+                $whereFilters,
                 $max
             );
         }
