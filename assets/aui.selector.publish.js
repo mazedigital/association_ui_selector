@@ -31,7 +31,7 @@
 							console.log(entry);
 							selectize.addOption(entry);
 						});
-					 });
+					 }, selectize.optgroups);
 				}
 			});
 		};
@@ -102,7 +102,7 @@
 					filters = this.$wrapper.closest('.field').data('filters');
 
 					// Fetch search options
-					fetchOptions(fieldId, query, filters, limit, numeric, callback);
+					fetchOptions(fieldId, query, filters, limit, numeric, callback, this.optgroups);
 
 					// Only fetch full list of option once
 					if(limit === 0) {
@@ -228,7 +228,7 @@
 			});
 		};
 
-		var fetchOptions = function(fieldId, query, filters, limit, numeric, callback) {
+		var fetchOptions = function(fieldId, query, filters, limit, numeric, callback, optgroups) {
 			$.ajax({
 				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
 				data: {
@@ -245,12 +245,21 @@
 					var entries = [];
 
 					$.each(result.entries, function(id, data) {
+
+						var optgroup = null;
+						if (optgroups){
+							$.each(optgroups, function(key,value){
+								if ( data.section.toLowerCase() == key.toLowerCase() ) optgroup = key;
+							});
+						}
+
 						entries.push({
 							value: (numeric === true ? id : data.value),
 							text: data.value,
 							section: data.section,
 							link: data.link,
-							id: id
+							id: id,
+							optgroup: optgroup
 						});
 					});
 
