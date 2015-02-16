@@ -28,7 +28,7 @@
 					selectize.clearOptions();
 					fetchOptions(fieldId, "", newfilters, limit, numeric, function(entries){ 
 						$.each(entries,function(index, entry){ 
-							console.log(entry);
+							// console.log(entry);
 							selectize.addOption(entry);
 						});
 					 }, selectize.optgroups);
@@ -49,11 +49,25 @@
 			$.each(field.data(),function(index, value){ 
 				if (index.indexOf("filter") == 0 ){
 					var filter = index.substring(6).toLowerCase();
+
+					//convert these parameters into real values
+					if (value == "{$entry-id}" ){  
+						value = Symphony.Context.get('env').entry_id;
+					} else if ( value.indexOf("{") == 0 ){
+						//this is some other parameter we need to work out how it should work
+						var fieldname = value.slice(1, -1);
+						value = jQuery('[name="fields['+ fieldname +']"]').val()
+					}
+
 					filters[filter] = value;
 				}
 			});
 
 			field.data("filters",filters);
+
+			if (Object.keys(filters).length > 0){
+				$(this).find('select option:not([selected])').remove();
+			}
 
 			// Check for storage element
 			if(!storage.length) {
@@ -85,9 +99,20 @@
 					option: renderOption
 				},
 				onInitialize: function() {
+
 					var items = this.$control.find('.item');
 
 					initExistingItems(items, numeric);
+
+					if (Object.keys(this.options).length <= items.length ){
+						filters = this.$wrapper.closest('.field').data('filters');
+						fetchOptions(fieldId, "", filters, limit, numeric, function(entries){ 
+							$.each(entries,function(index, entry){ 
+								selectize.addOption(entry);
+							});
+						 }, this.optgroups);
+					}
+
 				},
 				onItemAdd: function(value, item) {
 					if(isNaN(item.attr('data-entry-id'))) {
