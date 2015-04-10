@@ -1,3 +1,187 @@
+/**
+ * @package assets
+ */
+
+(function($, Symphony) {
+
+	/**
+	 * Create orderable elements.
+	 *
+	 * @name $.symphonyDraggable
+	 * @class
+	 *
+	 * @param {Object} options An object specifying containing the attributes specified below
+	 * @param {String} [options.items='li'] Selector to find items to be orderable
+	 * @param {String} [options.handles='*'] Selector to find children that can be grabbed to re-order
+	 * @param {String} [options.ignore='input, textarea, select'] Selector to find elements that should not propagate to the handle
+	 * @param {Integer} [options.delay=250] Time used to delay actions
+	 *
+	 * @example
+
+			$('table').symphonyDraggable({
+				items: 'tr',
+				handles: 'td'
+			});
+	 */
+	$.fn.symphonyDraggable = function(options) {
+		var objects = this,
+			settings = {
+				items: 'li',
+				handles: '*',
+				ignore: 'input, textarea, select, a',
+				dropto: 'input, textarea',
+				delay: 250
+			},
+			handle = null;
+
+		$.extend(settings, options);
+
+		function insertAtCaret(item, value) {
+			return item.each(function() {
+				// Trident:
+				if (document.selection) {
+					this.focus();
+					sel = document.selection.createRange();
+					sel.text = value;
+					this.focus();
+				}
+				
+				// Gecko:
+				else if (this.selectionStart || this.selectionStart == '0') {
+					var startPos = this.selectionStart;
+					var endPos = this.selectionEnd;
+					var scrollTop = this.scrollTop;
+					this.value = this.value.substring(0, startPos) + value + this.value.substring(endPos,this.value.length);
+					this.focus();
+					this.selectionStart = startPos + value.length;
+					this.selectionEnd = startPos + value.length;
+					this.scrollTop = scrollTop;
+						
+				// Failsafe:
+				} else {
+					this.value += value;
+					this.focus();
+				}
+			});
+		};
+
+	/*-------------------------------------------------------------------------
+		Events
+	-------------------------------------------------------------------------*/
+
+		// Start ordering
+		objects.on('mousedown.draggable', settings.items + ' ' + settings.handles, function startDragging(event) {
+			handle = $(this);
+
+			var item = handle.parents(settings.items),
+				object = handle.parents('.draggable');
+
+			// Needed to prevent browsers from selecting texts and focusing textinputs
+			if(!$(event.target).is('input, textarea')) {
+				event.preventDefault();
+			}
+
+			if(!handle.is(settings.ignore) && !$(event.target).is(settings.ignore)) {
+
+				// Highlight item
+				if(object.is('.selectable, .collapsible')) {
+
+					// Delay ordering to avoid conflicts with scripts bound to the click event
+					setTimeout(function() {
+						if(object.data('dragging') == 1) {
+							object.trigger('orderstart.draggable', [item]);
+							item.addClass('ordering');
+						}
+					}, settings.delay);
+				}
+				else {
+					object.trigger('orderstart.draggable', [item]);
+					item.addClass('ordering');
+				}
+			}
+		});
+
+		// Stop ordering
+		$(document).on('mouseup.draggable', function stopDragging(event) {
+			var object = $(this),
+				item;
+
+			if (handle == null) return;
+
+			var dropItem = handle;
+			handle = null;
+
+			if(!$(event.target).is(settings.dropto)) {
+				event.preventDefault();
+				return;
+			}
+
+			insertAtCaret($(event.target),"<image-test name='baba'>");
+
+		});
+
+/*		// Order items
+		$(document).on('mousemove.draggable', '.draggable:has(.dragging)', function order(event) {
+			var object = $(this);
+			if (object.data('dragging') != 1) {
+				return;
+			}
+			// Only keep what we need from event object
+			var pageY = event.pageY;
+			Symphony.Utilities.requestAnimationFrame(function () {
+				var item = object.find('.ordering');
+
+				// If there is still an ordering item in DOM
+				if (!item.length) {
+					return;
+				}
+
+				var top = item.offset().top,
+					bottom = top + item.outerHeight(),
+					prev, next;
+
+				// Remove text ranges
+				if(window.getSelection) {
+					window.getSelection().removeAllRanges();
+				}
+
+				// Move item up
+				if(pageY < top) {
+					prev = item.prev(settings.items);
+					if(prev.length > 0) {
+						item.insertBefore(prev);
+						object.trigger('orderchange', [item]);
+					}
+				}
+
+				// Move item down
+				else if(pageY > bottom) {
+					next = item.next(settings.items);
+					if(next.length > 0) {
+						item.insertAfter(next);
+						object.trigger('orderchange', [item]);
+					}
+				}
+			});
+		});*/
+
+	/*-------------------------------------------------------------------------
+		Initialisation
+	-------------------------------------------------------------------------*/
+
+		// Make orderable
+		objects.addClass('draggable');
+
+	/*-----------------------------------------------------------------------*/
+
+		return objects;
+	};
+
+})(window.jQuery, window.Symphony);
+
+
+
+
 (function($, Symphony) {
 	'use strict';
 
@@ -144,6 +328,13 @@
 			if(storage.is('[multiple]')) {
 				selectize.$control.off('mousedown');
 			}
+
+			selectize.$control.symphonyDraggable({
+				items: '.item',
+				handles: 'span',
+				ignore: 'input, textarea, select, a',
+				delay: 250
+			});
 	
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
@@ -200,11 +391,14 @@
 				type: 'GET',
 				success: function(result) {
 					item.attr('data-entry-id', entryId);
-					item.attr('data-section-handle', result.entry.section);
-					item.attr('data-link', result.entry.link);
 
-					if(result.entry.value != '') {
-						item.find('span').html(result.entry.value);
+					if (result.entry){
+						item.attr('data-section-handle', result.entry.section);
+						item.attr('data-link', result.entry.link);
+
+						if(result.entry.value != '') {
+							item.find('span').html(result.entry.value);
+						}
 					}
 				}
 			});
