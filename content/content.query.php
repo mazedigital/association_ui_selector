@@ -64,7 +64,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
 
         // Get entries
         if (!empty($search)) {
-            $handle = General::createHandle($search);
+            $handle = General::createHandle(urldecode($search));
 
             // Get columns
             $columns = Symphony::Database()->fetchCol('column_name',
@@ -84,7 +84,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
             $where = array();
             foreach ($columns as $column) {
                 //if column contains handle do a handle search - increases possibility of a match
-                if (strpos($column, "-handle") > 0){
+                if (strpos($column, "handle") !== false){
                     $where[] = "ed.`$column` LIKE '%$handle%'";
                 } else {
                     $where[] = "ed.`$column` LIKE '%$search%'";
