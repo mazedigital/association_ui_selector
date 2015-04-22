@@ -199,17 +199,69 @@
 		};
 
 		var updateFilters = function(id,newfilters) {
+
 			fields.each(function(){
 				var field = $(this); 
 				if (field.attr('id') == "field-" + id){
+					field.data('filtersReset',true);
 					field.data("filters",newfilters);
 					var storage = field.find('.selectized'),
 						selectize = storage[0].selectize,
 						fieldId = field.data('parent-section-field-id'),
 						limit = parseInt(field.data('limit')),
 						numeric = true;
+
+					//store existing option values
+					var currentValues = selectize.getValue();
+
+					//repopulate existing values (it will take some time with ajax and options will be already cleared by time there is a response)
+					for (var i = currentValues.length - 1; i >= 0; i--) {
+						//use closure to keep values within the context
+						(function(currentID,textValue) {
+							$.ajax({
+								url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
+								data: {
+									field_id: fieldId,
+									query: textValue,
+									filter: newfilters,
+									limit: 10
+								},
+								type: 'GET',
+								success: function(result) {
+									$.each(result.entries, function(id, data) {
+
+										//check in case there are multiple values which match the string value
+										if (id != currentID) return;
+
+										selectize.settings.create = true;
+
+										var optgroup = null;
+										if (selectize.optgroups){
+											$.each(selectize.optgroups, function(key,value){
+												if ( data.section.toLowerCase() == key.toLowerCase() ) optgroup = key;
+											});
+										}
+										
+										//set the correct data values for proper display
+										data.text = data.value;
+										data.value = id;
+										data.optgroup = optgroup;
+
+										//add item back
+										selectize.addOption(data);
+										selectize.addItem(data.value);
+										selectize.settings.create = false;
+
+									});
+								}
+							});
+						})(currentValues[i],selectize.options[currentValues[i]].text);
+					};
+
 					//clear existing options as filters have changed
 					selectize.clearOptions();
+					console.log("cleared");
+
 					fetchOptions(fieldId, "", newfilters, limit, numeric, function(entries){ 
 						$.each(entries,function(index, entry){ 
 							// console.log(entry);
@@ -291,6 +343,7 @@
 					if (Object.keys(this.options).length <= items.length ){
 						filters = this.$wrapper.closest('.field').data('filters');
 						fetchOptions(fieldId, "", filters, limit, numeric, function(entries){ 
+							if (field.data('filtersReset')) return;
 							$.each(entries,function(index, entry){ 
 								selectize.addOption(entry);
 							});
