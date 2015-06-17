@@ -215,7 +215,7 @@
 					var currentValues = selectize.getValue();
 
 					//repopulate existing values (it will take some time with ajax and options will be already cleared by time there is a response)
-					for (var i = currentValues.length - 1; i >= 0; i--) {
+					for (var i = 0; i <= currentValues.length; i++) {
 						//use closure to keep values within the context
 						(function(currentID,textValue) {
 							$.ajax({
@@ -258,9 +258,10 @@
 						})(currentValues[i],selectize.options[currentValues[i]].text);
 					};
 
+					//
+
 					//clear existing options as filters have changed
 					selectize.clearOptions();
-					console.log("cleared");
 
 					fetchOptions(fieldId, "", newfilters, limit, numeric, function(entries){ 
 						$.each(entries,function(index, entry){ 
