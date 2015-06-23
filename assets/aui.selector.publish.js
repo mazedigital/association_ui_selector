@@ -215,7 +215,7 @@
 					var currentValues = selectize.getValue();
 
 					//repopulate existing values (it will take some time with ajax and options will be already cleared by time there is a response)
-					for (var i = 0; i <= currentValues.length; i++) {
+					for (var i = 0; i < currentValues.length; i++) {
 						//use closure to keep values within the context
 						(function(currentID,textValue) {
 							$.ajax({
