@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.1.2" date="2015-06-24" min="2.5">
+			- Entry limit in search drawer honours the field's settings (#48)
+		</release>
 		<release version="1.1.1" date="2014-09-15" min="2.5">
 			- Fixed optgroup styling (#33)
 			- Fixed auto-focus behaviour (#36)
