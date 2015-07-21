@@ -241,7 +241,8 @@ table tr.selected .multi[data-interface^="aui-selector"]::after {
 }
 
 table .multi[data-interface^="aui-selector"] ul {
-	overflow: auto;
+	overflow-y: auto;
+  overflow-x: hidden;
 	max-height: 4.9rem;
 	margin: 0;
 }
