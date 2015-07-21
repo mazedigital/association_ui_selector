@@ -214,13 +214,13 @@
 
 /* Index table */
 
-table [data-interface^="aui-selector"] {
+table .multi[data-interface^="aui-selector"] {
 	position: relative;
 	margin: -0.8rem 0 0 -0.8rem;
 	padding-bottom: 2.4rem;
 }
 
-table tr [data-interface^="aui-selector"]::after {
+table tr .multi[data-interface^="aui-selector"]::after {
 	content: '↓ ' attr(data-count) ' ' attr(data-label-plural);
 	position: absolute;
 	left: 0;
@@ -232,44 +232,44 @@ table tr [data-interface^="aui-selector"]::after {
 	border-top: 0.1rem solid #e6e6e5;
 }
 
-table tr [data-interface^="aui-selector"][data-count="1"]::after {
+table tr .multi[data-interface^="aui-selector"][data-count="1"]::after {
 	content: '↓ '  attr(data-count) ' ' attr(data-label-singular);
 }
 
-table tr.selected [data-interface^="aui-selector"]::after {
+table tr.selected .multi[data-interface^="aui-selector"]::after {
 	border-top-color: #9eb4d5;
 }
 
-table [data-interface^="aui-selector"] ul {
+table .multi[data-interface^="aui-selector"] ul {
 	overflow: auto;
 	max-height: 4.9rem;
 	margin: 0;
 }
 
-table [data-interface^="aui-selector"] li {
+table .multi[data-interface^="aui-selector"] li {
 	display: block;
 	padding: 0.8rem;
 	border-bottom: 0.1rem solid #e6e6e5;
 }
 
-table tr.selected [data-interface^="aui-selector"] li {
+table tr.selected .multi[data-interface^="aui-selector"] li {
 	border-top-color: #9eb4d5;
 }
 
-table [data-interface^="aui-selector"] li::before {
+table .multi[data-interface^="aui-selector"] li::before {
 	display: none;
 }
 
-table [data-interface^="aui-selector"] li br {
+table .multi[data-interface^="aui-selector"] li br {
 	display: block;
 }
 
-table [data-interface^="aui-selector"] li a {
+table .multi[data-interface^="aui-selector"] li a {
 	color: #000;
 	border-bottom: none;
 }
 
-table [data-interface^="aui-selector"] li strong {
+table .multi[data-interface^="aui-selector"] li strong {
 	font-weight: bold;
 }
 
@@ -277,13 +277,13 @@ table [data-interface^="aui-selector"] li strong {
 
 [data-interface^="aui-selector"] .item,
 [data-interface^="aui-selector"] .selectize-dropdown .option,
-table [data-interface^="aui-selector"] li {
+table .multi[data-interface^="aui-selector"] li {
 	white-space: nowrap;
 }
 
 [data-interface^="aui-selector"] .item img,
 [data-interface^="aui-selector"] .selectize-dropdown .option img,
-table [data-interface^="aui-selector"] li img {
+table .multi[data-interface^="aui-selector"] li img {
 	float: left;
 	margin: -0.2rem 1rem 0.4rem 0;
 	border: 0.1rem solid rgba(0, 0, 0, 0.2);
@@ -299,7 +299,7 @@ table [data-interface^="aui-selector"] li img {
 
 [data-interface^="aui-selector"] .item em,
 [data-interface^="aui-selector"] .selectize-dropdown .option em,
-table [data-interface^="aui-selector"] li em {
+table .multi[data-interface^="aui-selector"] li em {
 	color: rgba(0, 0, 0, 0.4);
 	font-style: normal;
 }
