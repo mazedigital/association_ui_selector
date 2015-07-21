@@ -38,7 +38,7 @@
 				maxOptions: (limit === 0) ? 1000 : limit,
 				preload: (limit === 0),
 				sortField: [{
-					field: 'text', 
+					field: 'text',
 					direction: 'asc'
 				}],
 				plugins: {
@@ -86,7 +86,7 @@
 			if(storage.is('[multiple]')) {
 				selectize.$control.off('mousedown');
 			}
-	
+
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
 				selectize.$control.symphonyOrderable({
@@ -119,11 +119,11 @@
 			else {
 				items.each(updateItemByValue);
 			}
-		}
+		};
 
 		var updateItemByID = function() {
 			var item = $(this),
-				entryId = item.attr('data-entry-id'), 
+				entryId = item.attr('data-entry-id'),
 				fieldId;
 
 			if(isNaN(entryId)) {
@@ -145,17 +145,19 @@
 					item.attr('data-section-handle', result.entry.section);
 					item.attr('data-link', result.entry.link);
 
-					if(result.entry.value != '') {
+					if(result.entry.value !== '') {
 						item.find('span').html(result.entry.value);
 					}
 				}
 			});
-		}
+		};
 
 		var updateItemByValue = function(index, item) {
-			var item = $(item),
-				fieldId = item.parents('.field').data('parent-section-field-id'),
-				id = item.data('value');
+			var fieldId, id;
+
+			item = $(item);
+			fieldId = item.parents('.field').data('parent-section-field-id');
+			id = item.data('value');
 
 			$.ajax({
 				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
@@ -173,7 +175,7 @@
 					});
 				}
 			});
-		}
+		};
 
 		var fetchItem = function(entryId, fieldId, numeric, callback) {
 			$.ajax({
@@ -279,16 +281,38 @@
 			}
 		};
 
+		var layoutIndex = function(table) {
+			var items = table.find('[data-interface^="aui-selector"] li:first-child');
+
+			items.each(function() {
+				var item = $(this),
+					height = item.innerHeight();
+
+				item.parent().css('max-height', height);
+			});
+		};
+
 		// API
 		return {
 			init: init,
 			update: updateItem,
-			add: addItem
+			add: addItem,
+			layoutIndex: layoutIndex
 		};
 	}();
 
 	$(document).on('ready.aui-selector', function() {
-		Symphony.Extensions.AssociationUISelector.init();
+		var table = $('#contents > form > table');
+
+		// Index
+		if (table.length) {
+			Symphony.Extensions.AssociationUISelector.layoutIndex(table);
+		}
+
+		// Entry
+		else {
+			Symphony.Extensions.AssociationUISelector.init();
+		}
 	});
 
 })(window.jQuery, window.Symphony);
