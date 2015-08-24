@@ -6,6 +6,16 @@
 		'Search and select': false
 	});
 
+	var utlityEl = $('<div/>');
+	function htmlDecode (value) {
+		if (typeof value === 'undefined') return '';
+		var decoded = utlityEl.html(value);
+		if (decoded.children().length) {
+			return value;
+		}
+		return decoded.text();
+	}
+
 	Symphony.Extensions.AssociationUISelector = function() {
 		var fields;
 
@@ -36,6 +46,7 @@
 			// Apply Selectize
 			storage.selectize({
 				preload: (limit === 0),
+				searchField: ['search'],
 				sortField: [{
 					field: 'text',
 					direction: 'asc'
@@ -54,6 +65,13 @@
 				},
 				onInitialize: function() {
 					var items = this.$control.find('.item');
+
+					$.each(this.options, function (key, option) {
+						var decodedText = htmlDecode(option.text);
+						var searchableText = utlityEl.html(decodedText).text();
+						option.text = decodedText;
+						option.search = searchableText;
+					});
 
 					initExistingItems(items, numeric);
 				},
@@ -187,7 +205,8 @@
 				success: function(result) {
 					callback({
 						value: (numeric === true ? entryId : result.entry.value),
-						text: result.entry.value,
+						text: htmlDecode(result.entry.value),
+						search: utlityEl.html( htmlDecode(result.entry.value) ).text(),
 						section: result.entry.section,
 						link: result.entry.link,
 						id: entryId
@@ -214,7 +233,8 @@
 					$.each(result.entries, function(id, data) {
 						entries.push({
 							value: (numeric === true ? id : data.value),
-							text: data.value,
+							text: htmlDecode(data.value),
+							search: utlityEl.html( htmlDecode(data.value) ).text(),
 							section: data.section,
 							link: data.link,
 							id: id
@@ -227,11 +247,11 @@
 		};
 
 		var renderItem = function(data, escape) {
-			return '<div class="item" data-section-handle="' + data.section + '" data-link="' + data.link + '" data-entry-id="' + data.id + '"><span>' + data.text + '</span></div>';
+			return '<div class="item" data-section-handle="' + data.section + '" data-link="' + data.link + '" data-entry-id="' + data.id + '"><span>' + htmlDecode(data.text) + '</span></div>';
 		};
 
 		var renderOption = function(data, escape) {
-			return '<div class="option"><span>' + data.text + '</span></div>';
+			return '<div class="option"><span>' + htmlDecode(data.text) + '</span></div>';
 		};
 
 		var orderStart = function(selectize) {
