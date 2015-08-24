@@ -35,6 +35,7 @@
 
 			// Apply Selectize
 			storage.selectize({
+				maxOptions: (limit === 0) ? 1000 : limit,
 				preload: (limit === 0),
 				sortField: [{
 					field: 'text',
