@@ -32,14 +32,14 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
 
     private function get($database, $field_id, $search, $max, $filters)
     {
+        // Build Filters
+        $field = FieldManager::fetch($field_id);
+        $section_id = $field->get('parent_section');
+
+        $whereFilters = '';
+        $joins = ' JOIN `tbl_entries` AS `e` ON (`e`.`id` = `ed`.`entry_id`)';
 
         if (!empty($filters)) {
-            // Build Filters
-            $field = FieldManager::fetch($field_id);
-            $section_id = $field->get('parent_section');
-
-            $whereFilters = '';
-            $joins = ' JOIN tbl_entries AS e ON (e.id = ed.entry_id)';
 
             foreach ($filters as $handle => $value) {
                 if (!is_array($value)) {
@@ -57,10 +57,24 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
                     $field->buildDSRetrievalSQL($value, $joins, $whereFilters, ($filter_type == Datasource::FILTER_AND ? true : false));
                 }
             }
-        } else{
-            $whereFilters = '';
-            $joins = '';
         }
+
+        /**
+         * Allow the results to be modified using adjust publish filtering functionality on the core
+         *
+         * @delegate AssociationFiltering
+         * @since Symphony 1.2.0
+         * @param string $context
+         * '/publish/'
+         * @param array $options
+         *  An array which should contain the section id
+         *  and the joins and where clauses by reference both passed by reference
+         */
+        Symphony::ExtensionManager()->notifyMembers('AssociationFiltering', '/publish/', array(
+            'section-id' => $section_id,
+            'joins' => &$joins,
+            'where' => &$whereFilters
+        ));
 
         // Get entries
         if (!empty($search)) {
@@ -69,8 +83,8 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
             // Get columns
             $columns = Symphony::Database()->fetchCol('column_name',
                 sprintf(
-                    "SELECT column_name
-                    FROM information_schema.columns
+                    "SELECT `column_name`
+                    FROM `information_schema`.`columns`
                     WHERE table_schema = '%s'
                     AND table_name = 'tbl_entries_data_%d'
                     AND column_name != 'id'
@@ -85,15 +99,15 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
             foreach ($columns as $column) {
                 //if column contains handle do a handle search - increases possibility of a match
                 if (strpos($column, "handle") !== false){
-                    $where[] = "ed.`$column` LIKE '%$handle%'";
+                    $where[] = "`ed`.`$column` LIKE '%$handle%'";
                 } else {
-                    $where[] = "ed.`$column` LIKE '%$search%'";
+                    $where[] = "`ed`.`$column` LIKE '%$search%'";
                 }
             }
 
             // Build query
             $query = sprintf(
-                "SELECT ed.* from tbl_entries_data_%d AS ed %s WHERE (%s) %s %s;",
+                "SELECT `ed`.* from `tbl_entries_data_%d` AS `ed` %s WHERE (%s) %s %s;",
                 $field_id,
                 $joins,
                 implode($where, " OR "),
@@ -103,7 +117,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
             
         } else {
             $query = sprintf(
-                "SELECT ed.* from tbl_entries_data_%d AS ed %s WHERE 1 %s %s;",
+                "SELECT `ed`.* from `tbl_entries_data_%d` AS `ed` %s WHERE 1 %s %s;",
                 $field_id,
                 $joins,
                 $whereFilters,

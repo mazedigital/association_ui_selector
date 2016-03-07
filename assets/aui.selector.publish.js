@@ -268,7 +268,7 @@
 							// console.log(entry);
 							selectize.addOption(entry);
 						});
-					 }, selectize.optgroups);
+					 }, selectize.optgroups, selectize);
 				}
 			});
 		};
@@ -320,8 +320,8 @@
 			storage.selectize({
 				preload: (limit === 0),
 				sortField: [{
-					field: 'text', 
-					direction: 'asc'
+					field: 'id', 
+					direction: 'desc'
 				}],
 				plugins: {
 					'remove_button': {
@@ -348,7 +348,7 @@
 							$.each(entries,function(index, entry){ 
 								selectize.addOption(entry);
 							});
-						 }, this.optgroups);
+						 }, this.optgroups, this);
 					}
 
 				},
@@ -358,6 +358,7 @@
 					}
 				},
 				load: function(query, callback) {
+
 					if((!query.length && limit > 0) || fetched === true) {
 						return callback();
 					}
@@ -365,7 +366,7 @@
 					filters = this.$wrapper.closest('.field').data('filters');
 
 					// Fetch search options
-					fetchOptions(fieldId, query, filters, limit, numeric, callback, this.optgroups);
+					fetchOptions(fieldId, query, filters, limit, numeric, callback, this.optgroups, this);
 
 					// Only fetch full list of option once
 					if(limit === 0) {
@@ -501,7 +502,7 @@
 			});
 		};
 
-		var fetchOptions = function(fieldId, query, filters, limit, numeric, callback, optgroups) {
+		var fetchOptions = function(fieldId, query, filters, limit, numeric, callback, optgroups, selectize) {
 			$.ajax({
 				url: Symphony.Context.get('root') + '/symphony/extension/association_ui_selector/query/',
 				data: {
@@ -536,17 +537,26 @@
 						});
 					});
 
-					callback(entries);
+					var selectizeOptionsFetched = $.Event( 'selectizeOptionsFetched' );
+
+					//not sure I took the 'right' approach
+
+					// selectize.trigger(selectizeOptionsFetched, entries, callback);
+					selectize.trigger('selectizeOptionsFetched', selectizeOptionsFetched, entries, callback);
+
+					if ( !selectizeOptionsFetched.isDefaultPrevented() ) {
+						callback(entries);
+					}
 				}
 			});
 		};
 
 		var renderItem = function(data, escape) {
-			return '<div class="item" data-section-handle="' + data.section + '" data-link="' + data.link + '" data-entry-id="' + data.id + '"><span>' + data.text + '</span></div>';
+			return '<div class="item ' + data.class + '"" data-section-handle="' + data.section + '" data-link="' + data.link + '" data-entry-id="' + data.id + '"><span>' + data.text + '</span></div>';
 		};
 
 		var renderOption = function(data, escape) {
-			return '<div class="option"><span>' + data.text + '</span></div>';
+			return '<div class="option ' + data.class + '"><span>' + data.text + '</span></div>';
 		};
 
 		var orderStart = function(selectize) {
