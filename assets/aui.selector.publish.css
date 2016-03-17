@@ -87,7 +87,7 @@
 }
 
 [data-interface^="aui-selector"] .selectize-input:not(.has-items) input {
-	height: 3rem;
+	height: 3.3rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
 }
