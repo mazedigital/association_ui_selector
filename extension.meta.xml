@@ -16,6 +16,7 @@
 	  <release version="1.3.0" date="2016-03-17" min="2.5">
 			- Interface redesign
 			- Search field always visible
+			- Indicate dragability by text rather than an icon
 		</release>
 		<release version="1.2.1" date="2015-07-21" min="2.5">
 			- Fixed styling of index table overviews for single select fields (requires Association Field 1.0.1)

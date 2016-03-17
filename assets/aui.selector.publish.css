@@ -261,7 +261,7 @@ table .multi[data-interface^="aui-selector"] li em {
 	cursor: -webkit-grab;
 	cursor: grab;
 	transition: all 0.2s ease-in-out;
-	padding-left: 2rem;
+	/* padding-left: 2rem; */
 }
 
 [data-interface='aui-selector-sortable'] .multi .item:hover {
@@ -269,18 +269,9 @@ table .multi[data-interface^="aui-selector"] li em {
 	z-index: 1000;
 }
 
-[data-interface='aui-selector-sortable'] .multi .item::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: calc(50% - 0.8rem);
-  left: 0.6rem;
-  width: 0.8rem;
-  height: 1.6rem;
-  margin: 0 0.8rem 0 0;
-  background-image: url("data:image/svg+xml;charset=UTF-8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='16px' height='32px' viewBox='0 0 16 32'><g fill='none' stroke='Silver' stroke-width='2' stroke-miterlimit='10'><polyline points='2,10 8,4 14,10 '/><polyline points='2,22 8,28 14,22 '/></g></svg>");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+
+.field-association label > span {
+  color: #a9a9a9;
 }
 
 [data-interface='aui-selector-sortable'] .multi .ordering {

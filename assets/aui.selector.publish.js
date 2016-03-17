@@ -3,6 +3,7 @@
 
 	Symphony.Language.add({
 		'Remove': false,
+		'drag to reorder': false,
 		'Search and select': false
 	});
 
@@ -312,6 +313,10 @@
 		else {
 			Symphony.Extensions.AssociationUISelector.init();
 		}
+		
+    // indicate dragability
+    $('.field[data-interface="aui-selector-sortable"]').find('label select').before('<span> – ' + Symphony.Language.get('drag to reorder') + '</span>');
+		
 	});
 
 })(window.jQuery, window.Symphony);

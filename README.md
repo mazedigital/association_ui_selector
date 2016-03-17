@@ -38,7 +38,7 @@ You can create a second row with a standard `<br />`. Emphasized text will be di
 If you want to display an image thumbnail you can make use of JIT. An image size of 35×35px works best. Using [this Reflection field fork](https://github.com/orchard-studio/reflectionfield/commit/55095a959edee25f6306718302404060dad58cb5) mentioned [here](http://www.getsymphony.com/discuss/thread/106489/4/#position-65), you can use `{root}` to create a dynamic URL:
 
 ```xml
-<img src='{root}/image/2/35/35/5/{entry/upload/filename}' /> {entry/title}<br/><em>{entry/upload/filename}</em>
+<img src='{root}/image/2/48/48/5/{entry/upload/filename}' /> {entry/title}<br/><em>{entry/upload/filename}</em>
 ```
 
 ##### Reflection field with XSLT-utility
