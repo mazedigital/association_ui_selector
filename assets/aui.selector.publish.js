@@ -190,6 +190,11 @@
 		'Search and select': false
 	});
 
+	// Dismiss unsaved changes notification
+	$(document).on('click', '#unsaved-changes-dismiss', function() {
+		$(this).parent().trigger('detach.notify');
+	});
+
 	Symphony.Extensions.AssociationUISelector = function() {
 		var fields;
 
@@ -350,12 +355,12 @@
 							});
 						 }, this.optgroups, this);
 					}
-
 				},
 				onItemAdd: function(value, item) {
 					if(isNaN(item.attr('data-entry-id'))) {
 						initExistingItems(item, numeric);
 					}
+					unsavedNotice();
 				},
 				load: function(query, callback) {
 
@@ -592,7 +597,20 @@
 				selectize.addItem(data.value);
 				selectize.settings.create = false;
 			});
+
+			unsavedNotice();
 		};
+
+		var unsavedNotice = function(){
+			// Unsaved changes
+			var	notifier = Symphony.Elements.header.find('div.notifier');
+			if($('.notice.unsaved-changes').length < 1) {
+				notifier.trigger('attach.notify', [
+					Symphony.Language.get('You have unsaved changes.' + ' <a id="unsaved-changes-dismiss">' + Symphony.Language.get('Ignore?') + '</a>'),
+					'unsaved-changes error'
+				]);
+			}
+		}
 
 		var toggleDropdownVisibility = function(selectize, show) {
 			if(show === true) {
