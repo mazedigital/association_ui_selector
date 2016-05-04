@@ -69,11 +69,15 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
          * @param array $options
          *  An array which should contain the section id
          *  and the joins and where clauses by reference both passed by reference
+         *  also contains a field-id of the current field being rendered
+         *  Filters are not obtained via callback in this instance
          */
         Symphony::ExtensionManager()->notifyMembers('AssociationFiltering', '/publish/', array(
             'section-id' => $section_id,
+            'field-id' => $field_id,
             'joins' => &$joins,
             'where' => &$whereFilters
+            // 'filters' => &$filters,
         ));
 
         // Get entries
