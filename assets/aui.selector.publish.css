@@ -12,9 +12,6 @@
 
 [data-interface^="aui-selector"] .selectize-input {
 	overflow: hidden;
-	margin-top: -0.1rem;
-	background-color: white;
-	box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.1), 0 0.1rem 0.2rem rgba(0,0,0,0.2);
 }
 
 /* Items */
@@ -41,14 +38,6 @@
   white-space: nowrap;
   text-align: center;
 }
-
-/* 
-[data-interface^="aui-selector"] .item::after {
-	content: '';
-	display: block;
-	clear: both;
-}
- */
 
 [data-interface^="aui-selector"] .multi .item {
 	box-sizing: border-box;
@@ -77,10 +66,12 @@
 	padding: 0.6rem 3rem 0.6rem 1rem;
 	line-height: 2.1rem;
 	border: none;
-	border-top: 0.1rem solid LightGray;
+	border-top: 0.1rem solid WhiteSmoke;
+	border-bottom: 0.1rem solid rgba(0,0,0,.2);
 	-webkit-user-select: auto !important;
 	opacity: 1 !important;
-	background-image: url("data:image/svg+xml;charset=UTF-8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='32px' height='32px' viewBox='0 0 32 32'><g><polyline fill='none' stroke='LightGray' stroke-width='2' stroke-miterlimit='10' points='4,11 16,22 28,11 '/></g></svg>");
+	background-color: transparent;
+	background-image: url("data:image/svg+xml;charset=UTF-8,<svg version='1.1' xmlns='http://www.w3.org/2000/svg' x='0' y='0' width='32px' height='32px' viewBox='0 0 32 32'><g><polyline fill='none' stroke='rgba(0,0,0,0.25)' stroke-width='2' stroke-miterlimit='10' points='4,11 16,22 28,11 '/></g></svg>");
 	background-repeat: no-repeat;
 	background-position: right 6px top 6px;
 	background-size: 20px 20px;

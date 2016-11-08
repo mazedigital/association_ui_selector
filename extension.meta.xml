@@ -13,7 +13,10 @@
 		</author>
 	</authors>
 	<releases>
-	  <release version="1.4.0" date="2016-03-21" min="2.5" max="2.x.x">
+	  <release version="1.4.1" date="2016-11-08" min="2.5" max="2.x.x">
+			- design simplification
+		</release>
+		<release version="1.4.0" date="2016-03-21" min="2.5" max="2.x.x">
 			- remove button visible for single selects
 			- bring own selectize.js with remove_button hack
 		</release>
