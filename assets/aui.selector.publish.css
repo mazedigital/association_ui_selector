@@ -272,3 +272,8 @@ table .multi[data-interface^="aui-selector"] li em {
 [data-interface^="aui-selector"] .multi .ordering a {
 	color: DarkGray;
 }
+
+/* Hide input on single selects with selected item since search wont work */
+.single .has-items input {
+display: none;
+}
