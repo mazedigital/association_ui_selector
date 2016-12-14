@@ -274,6 +274,6 @@ table .multi[data-interface^="aui-selector"] li em {
 }
 
 /* Hide input on single selects with selected item since search wont work */
-.single .has-items input {
-display: none;
+div.single .has-items input {
+  display: none;
 }

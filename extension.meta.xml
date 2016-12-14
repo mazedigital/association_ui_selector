@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+	  <release version="1.4.2" date="2016-1214" min="2.5" max="2.x.x">
+			- hide search field on single selects with a selected item
+		</release>
 	  <release version="1.4.1" date="2016-11-08" min="2.5" max="2.x.x">
 			- design simplification
 		</release>
