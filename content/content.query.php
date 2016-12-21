@@ -9,7 +9,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
     {
         $database = Symphony::Configuration()->get('db', 'database');
         $field_ids = explode(',', General::sanitize($_GET['field_id']));
-        $search = General::sanitize($_GET['query']);
+        $search = General::sanitize(urldecode($_GET['query']));
         $limit = intval(General::sanitize($_GET['limit']));
 
         // Set limit
