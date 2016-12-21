@@ -13,7 +13,10 @@
 	$dictionary = array(
 
     'Remove' => 
-		'entfernen',
+		'×',
+		
+		'drag to reorder' =>
+		'zum Sortieren Einträge verschieben',
 		
 		'Search and select' => 
 		'suchen und auswählen'

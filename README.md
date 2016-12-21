@@ -1,6 +1,6 @@
 ## Association UI for Symphony: Selector
 
-![Interface preview](https://cloud.githubusercontent.com/assets/25466/3174581/3520a7de-ebf3-11e3-9907-a0e4b77fce0b.png)
+![Interface preview](https://cloud.githubusercontent.com/assets/446874/13914883/96728666-ef51-11e5-8125-347aea883526.png)
 
 Selector provides a search and select interface for associative Symphony fields. It works with core select boxes and tag lists as well as with [Association fields](https://github.com/symphonists/association_field).
 
@@ -38,7 +38,7 @@ You can create a second row with a standard `<br />`. Emphasized text will be di
 If you want to display an image thumbnail you can make use of JIT. An image size of 35×35px works best. Using [this Reflection field fork](https://github.com/orchard-studio/reflectionfield/commit/55095a959edee25f6306718302404060dad58cb5) mentioned [here](http://www.getsymphony.com/discuss/thread/106489/4/#position-65), you can use `{root}` to create a dynamic URL:
 
 ```xml
-<img src='{root}/image/2/35/35/5/{entry/upload/filename}' /> {entry/title}<br/><em>{entry/upload/filename}</em>
+<img src='{root}/image/2/48/48/5/{entry/upload/filename}' /> {entry/title}<br/><em>{entry/upload/filename}</em>
 ```
 
 ##### Reflection field with XSLT-utility
@@ -64,7 +64,7 @@ The XSLT-utility needs to be in the `workspace/utilities` folder. It will be sel
                 <xsl:text><![CDATA[<img src=']]></xsl:text>
                 <!-- I’m using a fork with a root-pseudo-parameter here. See https://github.com/animaux/reflectionfield/commit/2d10a65c5f9d0ed59f8c211863808471b90a3376 -->
                 <xsl:value-of select="//params/root"/>
-                <xsl:text>/image/2/35/35/5</xsl:text>
+                <xsl:text>/image/2/48/48/5</xsl:text>
                 <xsl:value-of select="image/@path"/>
                 <xsl:text>/</xsl:text>
                 <xsl:value-of select="image/filename"/>
