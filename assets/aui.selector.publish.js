@@ -523,34 +523,41 @@
 				success: function(result) {
 					var entries = [];
 
-					$.each(result.entries, function(id, data) {
+					if(typeof(result.entries) == "object"){
 
-						var optgroup = null;
-						if (optgroups){
-							$.each(optgroups, function(key,value){
-								if ( data.section.toLowerCase() == key.toLowerCase() ) optgroup = key;
+						$.each(result.entries, function(id, data) {
+
+							var optgroup = null;
+							if (optgroups){
+								$.each(optgroups, function(key,value){
+									if ( data.section.toLowerCase() == key.toLowerCase() ) optgroup = key;
+								});
+							}
+
+							entries.push({
+								value: (numeric === true ? id : data.value),
+								text: data.value,
+								section: data.section,
+								link: data.link,
+								id: id,
+								optgroup: optgroup
 							});
-						}
-
-						entries.push({
-							value: (numeric === true ? id : data.value),
-							text: data.value,
-							section: data.section,
-							link: data.link,
-							id: id,
-							optgroup: optgroup
 						});
-					});
 
-					var selectizeOptionsFetched = $.Event( 'selectizeOptionsFetched' );
+						var selectizeOptionsFetched = $.Event( 'selectizeOptionsFetched' );
 
-					//not sure I took the 'right' approach
+						//not sure I took the 'right' approach
 
-					// selectize.trigger(selectizeOptionsFetched, entries, callback);
-					selectize.trigger('selectizeOptionsFetched', selectizeOptionsFetched, entries, callback);
+						// selectize.trigger(selectizeOptionsFetched, entries, callback);
+						selectize.trigger('selectizeOptionsFetched', selectizeOptionsFetched, entries, callback);
 
-					if ( !selectizeOptionsFetched.isDefaultPrevented() ) {
-						callback(entries);
+						if ( !selectizeOptionsFetched.isDefaultPrevented() ) {
+							callback(entries);
+						}
+						
+					}
+					else{
+						//not object
 					}
 				}
 			});
