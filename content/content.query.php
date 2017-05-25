@@ -10,8 +10,15 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         $database = Symphony::Configuration()->get('db', 'database');
         $field_ids = explode('|', General::sanitize($_GET['field_id']));
         $search = Symphony::Database()->cleanValue(General::sanitize($_GET['query']));
+        $entry_id = Symphony::Database()->cleanValue(General::sanitize($_GET['entry_id']));
         $limit = intval(General::sanitize($_GET['limit']));
         $filters = $_GET['filter'];
+        $searchById = false;
+
+        if (empty($search) && is_numeric($entry_id)){
+            $search = $entry_id;
+            $searchById = true;
+        }
 
         // Set limit
         if ($limit === 0) {
@@ -23,14 +30,14 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         }
 
         foreach($field_ids as $field_id) {
-            $this->get($database, intval($field_id), $search, $max, $filters);
+            $this->get($database, intval($field_id), $search, $max, $filters, $searchById);
         }
 
         // Return results
         return $this->_Result;
     }
 
-    private function get($database, $field_id, $search, $max, $filters)
+    private function get($database, $field_id, $search, $max, $filters, $searchById = false)
     {
         // Build Filters
         $field = FieldManager::fetch($field_id);
@@ -81,7 +88,15 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         ));
 
         // Get entries
-        if (!empty($search)) {
+        if (!empty($search) && $searchById) {
+            $query = sprintf(
+                "SELECT `ed`.* from `tbl_entries_data_%d` AS `ed` %s WHERE `e`.`id` = '$search' %s %s;",
+                $field_id,
+                $joins,
+                $whereFilters,
+                $max
+            );
+        } else if (!empty($search)) {
             $handle = General::createHandle(urldecode($search));
 
             // Get columns

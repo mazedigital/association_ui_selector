@@ -227,7 +227,7 @@
 								url: Symphony.Context.get('symphony')  + '/extension/association_ui_selector/query/',
 								data: {
 									field_id: fieldId,
-									query: textValue,
+									entry_id: currentID,
 									filter: newfilters,
 									limit: 10
 								},
