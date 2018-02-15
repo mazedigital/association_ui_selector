@@ -342,6 +342,8 @@
 				},
 				onInitialize: function() {
 
+					field.data('prev-value',field.find('select').val());
+
 					var items = this.$control.find('.item');
 
 					initExistingItems(items, numeric);
@@ -355,12 +357,14 @@
 							});
 						 }, this.optgroups, this);
 					}
+
 				},
 				onItemAdd: function(value, item) {
 					if(isNaN(item.attr('data-entry-id'))) {
 						initExistingItems(item, numeric);
+					} else {
+						unsavedNotice();
 					}
-					unsavedNotice();
 				},
 				load: function(query, callback) {
 
@@ -601,7 +605,7 @@
 			unsavedNotice();
 		};
 
-		var unsavedNotice = function(){
+		var unsavedNotice = function(field){
 			// Unsaved changes
 			var	notifier = Symphony.Elements.header.find('div.notifier');
 			if($('.notice.unsaved-changes').length < 1) {
