@@ -442,9 +442,9 @@
 			if(isNaN(entryId)) {
 				entryId = item.data('value');
 			}
-			else {
+			// else {
 				fieldId = item.parents('.field').data('parent-section-field-id');
-			}
+			// }
 
 			$.ajax({
 				url: Symphony.Context.get('symphony')  + '/extension/association_ui_selector/get/',

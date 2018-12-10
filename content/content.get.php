@@ -5,6 +5,10 @@ require_once(TOOLKIT . '/class.jsonpage.php');
 Class contentExtensionAssociation_ui_selectorGet extends JSONPage
 {
 
+    public function getContext(){
+        return;
+    }
+
     public function view()
     {
         $entry_id = General::sanitize($_GET['entry_id']);
