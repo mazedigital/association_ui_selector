@@ -12,6 +12,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         $search = Symphony::Database()->cleanValue(General::sanitize($_GET['query']));
         $limit = intval(General::sanitize($_GET['limit']));
         $filters = $_GET['filter'];
+        $entry_id = $_GET['entry_id'];
 
         // Set limit
         if ($limit === 0) {
@@ -23,20 +24,25 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
         }
 
         foreach($field_ids as $field_id) {
-            $this->get($database, intval($field_id), $search, $max, $filters);
+            $this->get($database, intval($field_id), $search, $max, $filters, $entry_id);
         }
 
         // Return results
         return $this->_Result;
     }
 
-    private function get($database, $field_id, $search, $max, $filters)
+    private function get($database, $field_id, $search, $max, $filters, $entry_id)
     {
         // Build Filters
         $field = FieldManager::fetch($field_id);
         $section_id = $field->get('parent_section');
 
         $whereFilters = '';
+
+        if ($entry_id){
+            $whereFilters .= " AND e.id = {$entry_id} ";
+        }
+
         $joins = ' JOIN `tbl_entries` AS `e` ON (`e`.`id` = `ed`.`entry_id`)';
 
         if (!empty($filters)) {

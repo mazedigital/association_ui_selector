@@ -229,7 +229,8 @@
 									field_id: fieldId,
 									query: textValue,
 									filter: newfilters,
-									limit: 10
+									limit: 1,
+									entry_id: currentID,
 								},
 								type: 'GET',
 								success: function(result) {
