@@ -199,7 +199,7 @@
 		var fields;
 
 		var init = function() {
-			fields = Symphony.Elements.contents.find('.field[data-interface^="aui-selector"]');
+			fields = Symphony.Elements.contents.find('.field[data-interface^="aui-selector"]:not(.field-taglist)');
 			fields.each(buildInterface);
 		};
 
