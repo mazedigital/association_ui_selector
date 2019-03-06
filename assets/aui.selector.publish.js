@@ -207,6 +207,11 @@
 
 			fields.each(function(){
 				var field = $(this); 
+
+				if (field.hasClass('field-taglist')){
+					return;
+				}
+
 				if (field.attr('id') == "field-" + id){
 					field.data('filtersReset',true);
 					field.data("filters",newfilters);
