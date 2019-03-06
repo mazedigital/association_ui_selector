@@ -296,7 +296,7 @@
 					//convert these parameters into real values
 					if (value == "{$entry-id}" ){  
 						value = Symphony.Context.get('env').entry_id;
-					} else if ( value.indexOf("{") == 0 ){
+					} else if ( typeof(value)=='string' && value.indexOf("{") == 0 ){
 						//this is some other parameter we need to work out how it should work
 						var fieldname = value.slice(1, -1);
 						value = jQuery('[name="fields['+ fieldname +']"]').val()
