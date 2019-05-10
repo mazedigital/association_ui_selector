@@ -2,7 +2,7 @@
 <extension id="association_ui_selector" status="development" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>Association UI: Selector</name>
 	<description>Search and select associated entries</description>
-	<repo type="github">https://github.com/hananils/association_ui_selector</repo>
+	<repo type="github">https://github.com/mazedigital/association_ui_selector</repo>
 	<types>
 		<type>Associations</type>
 	</types>
@@ -13,6 +13,9 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.2.2" date="2019-05-10" min="2.5">
+			- - Added support for PHP 7.x
+		</release>
 		<release version="1.2.1" date="2015-07-21" min="2.5">
 			- Fixed styling of index table overviews for single select fields (requires Association Field 1.0.1)
 		</release>
