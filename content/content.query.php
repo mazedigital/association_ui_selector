@@ -104,6 +104,11 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
                 )
             );
 
+            $order = "";     
+            if(in_array("value", $columns)){
+                $order = "order by value";
+            }
+
             // Build where clauses
             $where = array();
             foreach ($columns as $column) {
@@ -122,6 +127,7 @@ Class contentExtensionAssociation_ui_selectorQuery extends JSONPage
                 $joins,
                 implode($where, " OR "),
                 $whereFilters,
+                $order,
                 $max
             );
             
