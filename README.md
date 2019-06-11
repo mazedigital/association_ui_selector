@@ -48,7 +48,7 @@ For more complex needs Reflection field lets you use an XSLT-utility. Here’s a
 ```xml
 {person}
 ```
-    
+
 The XSLT-utility needs to be in the `workspace/utilities` folder. It will be selectable in the Reflection field settings:
 
 ```xml
@@ -101,7 +101,7 @@ The XSLT-utility needs to be in the `workspace/utilities` folder. It will be sel
 
 The interface of Selector is based on [Selectize by Brian Reavis](https://github.com/brianreavis/selectize.js) bundled with the Symphony core.
 
-This project has kindly been funded by [Bernardo Dias da Cruz](http://bernardodiasdacruz.com/), Ben Babcock, Juraj Kapsz, Daniel Golbig, Vojtech Grec, [Andrea Buran](http://www.andreaburan.com/), [Brendan Abbot](http://bloodbone.ws/), [Roman Klein](http://romanklein.com), [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/), Andrew Minton, munki-boy, Martijn Kremers, Ian Young, Leo Nikkilä, [Jonathan Mifsud](http://jonmifsud.com/) and others. [Read more](http://www.getsymphony.com/discuss/thread/106489/). 
+This project has kindly been funded by [Bernardo Dias da Cruz](http://bernardodiasdacruz.com/), Ben Babcock, [Juraj Kapsz](http://jurajkapsz.sk/), Daniel Golbig, Vojtech Grec, [Andrea Buran](http://www.andreaburan.com/), [Brendan Abbot](http://bloodbone.ws/), [Roman Klein](http://romanklein.com), [Korelogic](http://korelogic.co.uk/), Ngai Kam Wing, [David Oliver](http://doliver.co.uk/), Patrick Probst, Mario Butera, John Puddephatt, [Goldwiege](http://www.goldwiege.de/), Andrew Minton, munki-boy, Martijn Kremers, Ian Young, Leo Nikkilä, [Jonathan Mifsud](http://jonmifsud.com/) and others. [Read more](http://www.getsymphony.com/discuss/thread/106489/).
 
 If you like this extension, please consider a donation to support the further development.
 
