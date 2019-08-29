@@ -1,10 +1,9 @@
 /**
- * Association UI: Selector 
+ * Association UI: Selector
  */
 
-[data-interface^=aui-selector] .selectize-control {
+[data-interface^="aui-selector"] .selectize-control {
 	position: relative;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin-top: 0.2rem;
 	border: 0.1rem solid #c5c5c5;
@@ -12,7 +11,7 @@
 	background: #fff;
 }
 
-[data-interface^=aui-selector] .selectize-control::after {
+[data-interface^="aui-selector"] .selectize-control::after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -24,31 +23,31 @@
 	opacity: 0.7;
 }
 
-[data-interface^=aui-selector] .selectize-control.multi::after {
+[data-interface^="aui-selector"] .selectize-control.multi::after {
 	height: 3.1rem;
 }
 
-[data-interface^=aui-selector] .selectize-input {
+[data-interface^="aui-selector"] .selectize-input {
 	overflow: hidden;
 	margin-top: -0.1rem;
 	border-radius: 0.5em;
 }
 
-[data-interface^=aui-selector] .single .selectize-input::after {
+[data-interface^="aui-selector"] .single .selectize-input::after {
 	height: 100%;
 }
 
-[data-interface^=aui-selector] .single .selectize-input.not-full {
+[data-interface^="aui-selector"] .single .selectize-input.not-full {
 	padding-left: 1rem;
 }
 
-[data-interface^=aui-selector] .single .input-active {
+[data-interface^="aui-selector"] .single .input-active {
 	border-color: #999;
 }
 
 /* Items */
 
-[data-interface^=aui-selector] .item {
+[data-interface^="aui-selector"] .item {
 	display: inline-block;
 	position: relative;
 	position: relative;
@@ -56,28 +55,27 @@
 	z-index: 100;
 }
 
-[data-interface^=aui-selector] .item::after {
+[data-interface^="aui-selector"] .item::after {
 	content: '';
 	display: block;
 	clear: both;
 }
 
-[data-interface^=aui-selector] .multi .item {
+[data-interface^="aui-selector"] .multi .item {
 	display: block;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	min-height: 3.3rem;
+	padding-right: 7rem;
 	border-top: 0.1rem solid #ccc;
 	background-color: #f5f5f5;
 	box-shadow: inset 0 0.1rem 0 #fff, 0 0.2rem 0.15rem rgba(0, 0, 0, 0.15);
-	padding-right: 7rem;
 }
 
-[data-interface^=aui-selector] .multi .item + .item {
+[data-interface^="aui-selector"] .multi .item + .item {
 	border-top: 0.1rem solid #ccc;
 }
 
-[data-interface^=aui-selector] .multi .ordering {
+[data-interface^="aui-selector"] .multi .ordering {
 	color: #fff;
 	border-color: #5c83ba !important;
 	background-color: #668abe !important;
@@ -85,7 +83,7 @@
 	cursor: move;
 }
 
-[data-interface^=aui-selector] .single .selectize-input input {
+[data-interface^="aui-selector"] .single .selectize-input input {
 	display: inline;
 	height: 2rem;
 	margin: 0;
@@ -94,22 +92,20 @@
 	border: none;
 	border-radius: 0.4rem;
 	background-color: transparent;
-
 	-webkit-user-select: auto !important;
 }
 
-[data-interface^=aui-selector] .single .selectize-input:not(.has-items) input {
+[data-interface^="aui-selector"] .single .selectize-input:not(.has-items) input {
 	position: relative !important;
 	left: 0 !important;
 	width: 100% !important;
 	margin: 0.5rem 0;
 }
 
-[data-interface^=aui-selector] .multi .selectize-input input {
+[data-interface^="aui-selector"] .multi .selectize-input input {
 	display: block;
 	position: relative !important;
 	left: 0 !important;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	width: 100% !important;
 	height: 3.3rem;
@@ -123,29 +119,28 @@
 	-webkit-user-select: auto !important;
 }
 
-[data-interface^=aui-selector] .multi .selectize-input:not(.has-items) input {
+[data-interface^="aui-selector"] .multi .selectize-input:not(.has-items) input {
+	height: 3rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
-	height: 3rem;
 }
 
-[data-interface^=aui-selector] .item span {
+[data-interface^="aui-selector"] .item span {
 	display: block;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 0.7rem 1rem 0.6rem;
 }
 
-[data-interface^=aui-selector] .multi .item span {
+[data-interface^="aui-selector"] .multi .item span {
 	padding: 0.8rem 1rem;
 	white-space: normal;
 }
 
-[data-interface^=aui-selector] .destructor {
+[data-interface^="aui-selector"] .destructor {
 	display: none;
 }
 
-[data-interface^=aui-selector] .multi .destructor {
+[data-interface^="aui-selector"] .multi .destructor {
 	display: block;
 	position: absolute;
 	top: 0.7rem;
@@ -156,30 +151,29 @@
 	border-bottom: none;
 }
 
-[data-interface^=aui-selector] .multi .destructor:hover {
+[data-interface^="aui-selector"] .multi .destructor:hover {
 	color: #494949;
 }
 
 /* Keep placeholder definitions separated, otherwise browsers might not apply the rules */
 
-[data-interface^=aui-selector] .single .has-items ::-webkit-input-placeholder {
+[data-interface^="aui-selector"] .single .has-items ::-webkit-input-placeholder {
 	color: transparent;
 }
 
-[data-interface^=aui-selector] .single .has-items ::-moz-placeholder {
+[data-interface^="aui-selector"] .single .has-items ::-moz-placeholder {
 	color: transparent;
 }
 
-[data-interface^=aui-selector] .single .has-items :-ms-input-placeholder {
+[data-interface^="aui-selector"] .single .has-items :-ms-input-placeholder {
 	color: transparent;
 }
 
 /* Dropdown */
 
-[data-interface^=aui-selector] .selectize-dropdown {
+[data-interface^="aui-selector"] .selectize-dropdown {
 	position: absolute;
 	overflow: hidden;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin: 0.2rem 0 0 0;
 	border-radius: 0.4rem;
@@ -188,18 +182,18 @@
 	z-index: 1000;
 }
 
-[data-interface^=aui-selector] .single .selectize-dropdown {
+[data-interface^="aui-selector"] .single .selectize-dropdown {
 	margin-top: 0.3rem;
 }
 
-[data-interface^=aui-selector] .selectize-dropdown-content {
+[data-interface^="aui-selector"] .selectize-dropdown-content {
 	overflow-x: hidden;
 	overflow-y: auto;
 	max-height: 16rem;
 }
 
-[data-interface^=aui-selector] .selectize-dropdown .optgroup,
-[data-interface^=aui-selector] .selectize-dropdown .option {
+[data-interface^="aui-selector"] .selectize-dropdown .optgroup,
+[data-interface^="aui-selector"] .selectize-dropdown .option {
 	overflow: hidden;
 	width: 100%;
 	padding: 0.8rem 1rem 0.7rem;
@@ -207,46 +201,110 @@
 	box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.15);
 }
 
-[data-interface^=aui-selector] .selectize-dropdown .optgroup {
+[data-interface^="aui-selector"] .selectize-dropdown .optgroup {
 	font-weight: bold;
 }
 
-[data-interface^=aui-selector] .selectize-dropdown .active {
+[data-interface^="aui-selector"] .selectize-dropdown .active {
 	color: #fff;
 	background-color: #668abe;
 	box-shadow: none;
 	cursor: pointer;
 }
 
+/* Index table */
+
+table .multi[data-interface^="aui-selector"] {
+	position: relative;
+	margin: -0.8rem 0 0 -0.8rem;
+	padding-bottom: 2.4rem;
+}
+
+table tr .multi[data-interface^="aui-selector"]::after {
+	content: '↓ ' attr(data-count) ' ' attr(data-label-plural);
+	position: absolute;
+	left: 0;
+	bottom: -0.8rem;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.8rem 0.8rem 0.8rem;
+	pointer-events: none;
+	border-top: 0.1rem solid #e6e6e5;
+}
+
+table tr .multi[data-interface^="aui-selector"][data-count="1"]::after {
+	content: '↓ '  attr(data-count) ' ' attr(data-label-singular);
+}
+
+table tr.selected .multi[data-interface^="aui-selector"]::after {
+	border-top-color: #9eb4d5;
+}
+
+table .multi[data-interface^="aui-selector"] ul {
+	overflow: auto;
+	max-height: 4.9rem;
+	margin: 0;
+}
+
+table .multi[data-interface^="aui-selector"] li {
+	display: block;
+	padding: 0.8rem;
+	border-bottom: 0.1rem solid #e6e6e5;
+}
+
+table tr.selected .multi[data-interface^="aui-selector"] li {
+	border-top-color: #9eb4d5;
+}
+
+table .multi[data-interface^="aui-selector"] li::before {
+	display: none;
+}
+
+table .multi[data-interface^="aui-selector"] li br {
+	display: block;
+}
+
+table .multi[data-interface^="aui-selector"] li a {
+	color: #000;
+	border-bottom: none;
+}
+
+table .multi[data-interface^="aui-selector"] li strong {
+	font-weight: bold;
+}
+
 /* Layouts */
 
-[data-interface^=aui-selector] .item,
-[data-interface^=aui-selector] .selectize-dropdown .option {
+[data-interface^="aui-selector"] .item,
+[data-interface^="aui-selector"] .selectize-dropdown .option,
+table .multi[data-interface^="aui-selector"] li {
 	white-space: nowrap;
 }
 
-[data-interface^=aui-selector] .item img,
-[data-interface^=aui-selector] .selectize-dropdown .option img {
+[data-interface^="aui-selector"] .item img,
+[data-interface^="aui-selector"] .selectize-dropdown .option img,
+table .multi[data-interface^="aui-selector"] li img {
 	float: left;
 	margin: -0.2rem 1rem 0.4rem 0;
 	border: 0.1rem solid rgba(0, 0, 0, 0.2);
 }
 
-[data-interface^=aui-selector] .multi .item img {
+[data-interface^="aui-selector"] .multi .item img {
 	margin-bottom: 0.5rem;
 }
 
-[data-interface^=aui-selector] .selectize-dropdown .option img {
+[data-interface^="aui-selector"] .selectize-dropdown .option img {
 	margin-bottom: 0;
 }
 
-[data-interface^=aui-selector] .item em,
-[data-interface^=aui-selector] .selectize-dropdown .option em {
+[data-interface^="aui-selector"] .item em,
+[data-interface^="aui-selector"] .selectize-dropdown .option em,
+table .multi[data-interface^="aui-selector"] li em {
 	color: rgba(0, 0, 0, 0.4);
 	font-style: normal;
 }
 
-[data-interface^=aui-selector] .selectize-dropdown .active em {
+[data-interface^="aui-selector"] .selectize-dropdown .active em {
 	color: rgba(255, 255, 255, 0.7);
 }
 
@@ -254,7 +312,6 @@
 
 [data-interface='aui-selector-sortable'] .multi .item {
 	cursor: -webkit-grab;
-	cursor: -moz-grab;
 	cursor: grab;
 }
 
@@ -277,7 +334,6 @@
 
 [data-interface='aui-selector-sortable'] .multi .ordering {
 	cursor: -webkit-grabbing;
-	cursor: -moz-grabbing;
 	cursor: grabbing;
 }
 
@@ -287,6 +343,6 @@
 	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0, rgba(255, 255, 255, 0.5) 0.1rem, transparent 0.1rem);
 }
 
-[data-interface^=aui-selector] .multi .ordering .destructor {
+[data-interface^="aui-selector"] .multi .ordering .destructor {
 	color: rgba(255, 255, 255, 0.7);
 }

@@ -331,8 +331,8 @@
 			storage.selectize({
 				preload: (limit === 0),
 				sortField: [{
-					field: 'id', 
-					direction: 'desc'
+					field: 'text',
+					direction: 'asc'
 				}],
 				plugins: {
 					'remove_button': {
@@ -399,6 +399,7 @@
 				selectize.$control.off('mousedown');
 			}
 
+<<<<<<< HEAD
 			selectize.$control.symphonyDraggable({
 				items: '.item',
 				handles: 'span',
@@ -406,6 +407,8 @@
 				delay: 250
 			});
 	
+=======
+>>>>>>> master
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
 				selectize.$control.symphonyOrderable({
@@ -438,11 +441,11 @@
 			else {
 				items.each(updateItemByValue);
 			}
-		}
+		};
 
 		var updateItemByID = function() {
 			var item = $(this),
-				entryId = item.attr('data-entry-id'), 
+				entryId = item.attr('data-entry-id'),
 				fieldId;
 
 			if(isNaN(entryId)) {
@@ -462,6 +465,7 @@
 				success: function(result) {
 					item.attr('data-entry-id', entryId);
 
+<<<<<<< HEAD
 					if (result.entry){
 						item.attr('data-section-handle', result.entry.section);
 						item.attr('data-link', result.entry.link);
@@ -469,15 +473,21 @@
 						if(result.entry.value != '') {
 							item.find('span').html(result.entry.value);
 						}
+=======
+					if(result.entry.value !== '') {
+						item.find('span').html(result.entry.value);
+>>>>>>> master
 					}
 				}
 			});
-		}
+		};
 
 		var updateItemByValue = function(index, item) {
-			var item = $(item),
-				fieldId = item.parents('.field').data('parent-section-field-id'),
-				id = item.data('value');
+			var fieldId, id;
+
+			item = $(item);
+			fieldId = item.parents('.field').data('parent-section-field-id');
+			id = item.data('value');
 
 			$.ajax({
 				url: Symphony.Context.get('symphony')  + '/extension/association_ui_selector/query/',
@@ -495,7 +505,7 @@
 					});
 				}
 			});
-		}
+		};
 
 		var fetchItem = function(entryId, fieldId, numeric, callback) {
 			$.ajax({
@@ -640,17 +650,39 @@
 			}
 		};
 
+		var layoutIndex = function(table) {
+			var items = table.find('[data-interface^="aui-selector"] li:first-child');
+
+			items.each(function() {
+				var item = $(this),
+					height = item.innerHeight();
+
+				item.parent().css('max-height', height);
+			});
+		};
+
 		// API
 		return {
 			init: init,
 			updateFilters: updateFilters,
 			update: updateItem,
-			add: addItem
+			add: addItem,
+			layoutIndex: layoutIndex
 		};
 	}();
 
 	$(document).on('ready.aui-selector', function() {
-		Symphony.Extensions.AssociationUISelector.init();
+		var table = $('#contents > form > table');
+
+		// Index
+		if (table.length) {
+			Symphony.Extensions.AssociationUISelector.layoutIndex(table);
+		}
+
+		// Entry
+		else {
+			Symphony.Extensions.AssociationUISelector.init();
+		}
 	});
 
 })(window.jQuery, window.Symphony);
