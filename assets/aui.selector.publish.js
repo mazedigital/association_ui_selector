@@ -399,16 +399,6 @@
 				selectize.$control.off('mousedown');
 			}
 
-<<<<<<< HEAD
-			selectize.$control.symphonyDraggable({
-				items: '.item',
-				handles: 'span',
-				ignore: 'input, textarea, select, a',
-				delay: 250
-			});
-	
-=======
->>>>>>> master
 			// Make sortable
 			if(field.is('[data-interface="aui-selector-sortable"]')) {
 				selectize.$control.symphonyOrderable({
@@ -465,7 +455,6 @@
 				success: function(result) {
 					item.attr('data-entry-id', entryId);
 
-<<<<<<< HEAD
 					if (result.entry){
 						item.attr('data-section-handle', result.entry.section);
 						item.attr('data-link', result.entry.link);
@@ -473,10 +462,6 @@
 						if(result.entry.value != '') {
 							item.find('span').html(result.entry.value);
 						}
-=======
-					if(result.entry.value !== '') {
-						item.find('span').html(result.entry.value);
->>>>>>> master
 					}
 				}
 			});
